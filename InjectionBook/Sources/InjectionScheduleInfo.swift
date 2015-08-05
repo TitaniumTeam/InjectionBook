@@ -12,5 +12,5 @@ class InjectionScheduleInfo: NSObject {
     var sickID = Int()
     var subMoth = Int()
     var number = Int()
-   
+    
 }

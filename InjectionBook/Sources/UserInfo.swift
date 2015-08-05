@@ -13,5 +13,5 @@ class UserInfo: NSObject {
     var userName = NSString()
     var userBirthDay = NSDate()
     var gender = Int()
-    var userID = Int()   
+    var userID = Int()
 }

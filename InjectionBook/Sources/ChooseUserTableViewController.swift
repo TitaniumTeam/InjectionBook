@@ -8,17 +8,7 @@
 
 import UIKit
 
-extension Array{
-    subscript(path: NSIndexPath) -> T{
-        return self[path.row]
-    }
-}
 
-extension NSIndexPath{
-    class func firstIndexPath() -> NSIndexPath{
-        return NSIndexPath(forRow: 0, inSection: 0)
-    }
-}
 
 
 class ChooseUserTableViewController: UITableViewController {
@@ -33,19 +23,7 @@ class ChooseUserTableViewController: UITableViewController {
     var cancelBarButtonItem: UIBarButtonItem!
     var selectionHandler: ((selectedItem: String) -> Void!)?
     var userID = 2
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        tableView.registerClass(ChooseUserTableViewCell.classForCoder(),
-            forCellReuseIdentifier: TableViewValues.identifier)
-    }
-    
-    override init(style: UITableViewStyle) {
-        super.init(style: style)
-    }
+    var chooseRow = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +37,8 @@ class ChooseUserTableViewController: UITableViewController {
         didSelectRowAtIndexPath indexPath: NSIndexPath) {
            // let selectedItem = items[indexPath]
           //  selectionHandler?(selectedItem: selectedItem)
-                                  userID = dataManager.userData[indexPath.row].userID
+            chooseRow = indexPath.row
+            userID = dataManager.userData[indexPath.row].userID
            self.performSegueWithIdentifier("returnHome", sender: self)
 
     }
@@ -77,6 +56,11 @@ class ChooseUserTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier(
                 TableViewValues.identifier, forIndexPath: indexPath) as! ChooseUserTableViewCell
             
+            if dataManager.userData[indexPath.row].gender == 0
+            {
+                cell.avartar.image = UIImage(named: "avatar_icon_girl")
+            }
+            
             cell.name?.text = dataManager.userData[indexPath.row].userName as String
             
             return cell
@@ -85,12 +69,12 @@ class ChooseUserTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == "User"
         {
-            println("1")
+       println("tét//")
             if let inject = segue.destinationViewController as? InjectionBookAllViewController{
-                println("2")
+              
                 if let injectIndex = tableView.indexPathForSelectedRow()?.row
                 {
-                    println("3")
+                  
                     inject.userID = dataManager.userData[injectIndex].userID
                 }
             }

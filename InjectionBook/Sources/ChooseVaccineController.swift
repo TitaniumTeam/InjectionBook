@@ -11,11 +11,16 @@ import UIKit
 class ChooseVaccineController: UIViewController , UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var chooseAllbtn: UIButton!
     var dataManager = DataManager()
     var userID = 1;
     var sickRegister = [SickRegisterInfo]()
     let db = SQLiteDB.sharedInstance()
-    
+    var ischooseALl = false
+    var isClick = Bool()
+    var gender = 0
+    var isEdit = false
+    let localNotification = LocalNotification()
     override func viewDidLoad() {
         super.viewDidLoad()
            }
@@ -23,8 +28,10 @@ class ChooseVaccineController: UIViewController , UITableViewDelegate, UITableVi
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = "Chọn vắc xin"
+    
         dataManager.getSickRegisterInfo(userID)
         dataManager.getSickInfo()
+      //  dataManager.getUserInfo()
         for sickRegisterData in dataManager.sickRegisterData
         {
             if sickRegisterData.isEnable == 1
@@ -34,7 +41,7 @@ class ChooseVaccineController: UIViewController , UITableViewDelegate, UITableVi
         }
         tableView.delegate = self
         tableView.dataSource = self
-
+        self.navigationItem.hidesBackButton = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,26 +64,56 @@ class ChooseVaccineController: UIViewController , UITableViewDelegate, UITableVi
     
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ChooseVaccineCell", forIndexPath: indexPath) as! ChooseVaccineViewCell
-        
-        // Configure the cell...
+                // Configure the cell...
         cell.sickName?.text = dataManager.dictSickInfo[sickRegister[indexPath.row].sickID]
         cell.sickID = sickRegister[indexPath.row].sickID
         
-        
-        
-        if sickRegister[indexPath.row].boolSelected
-        {
+       if self.ischooseALl == true
+       {
             cell.isCheck.image = UIImage(named: "ic_checked")
             cell.intSelected = 1
             sickRegister[indexPath.row].isSelected = 1
+            if sickRegister[indexPath.row].boolSelected
+            {
+                cell.isCheck.image = UIImage(named: "ic_checked")
+                cell.intSelected = 1
+            sickRegister[indexPath.row].isSelected = 1
+            }
+            else
+            {
+                cell.isCheck.image = UIImage(named: "ic_uncheck")
+                cell.intSelected = 0
+                sickRegister[indexPath.row].isSelected = 0
+            }
+
         }
-        else
+        else if self.ischooseALl == false
+       {
+        
+        if isClick == true
         {
             cell.isCheck.image = UIImage(named: "ic_uncheck")
             cell.intSelected = 0
             sickRegister[indexPath.row].isSelected = 0
+            
         }
-
+        else
+        {
+            if sickRegister[indexPath.row].boolSelected
+            {
+                cell.isCheck.image = UIImage(named: "ic_checked")
+                cell.intSelected = 1
+                sickRegister[indexPath.row].isSelected = 1
+            }
+            else
+            {
+                cell.isCheck.image = UIImage(named: "ic_uncheck")
+                cell.intSelected = 0
+                sickRegister[indexPath.row].isSelected = 0
+            }
+        
+        }
+        }
         return cell
     }
     
@@ -87,78 +124,142 @@ class ChooseVaccineController: UIViewController , UITableViewDelegate, UITableVi
     
     }
     
-    @IBAction func btnSaveVaccine(sender: UIBarButtonItem) {
+    @IBAction func chooseAll(sender: UIButton) {
         
-        for sickRegisterInfo in sickRegister
+        self.ischooseALl = !self.ischooseALl
+      //  tableView.reloadData()
+        let check = sender as UIButton
+        self.isClick = !isClick
+        if self.ischooseALl == true
         {
-            let sql = "UPDATE SickRegister SET Selected = '\(sickRegisterInfo.isSelected)' WHERE UserID = \(sickRegisterInfo.userID) AND SickID =  \(sickRegisterInfo.sickID)"
-            let rc = db.execute(sql)
+            chooseAllbtn.setImage(UIImage(named: "ic_checked"), forState: nil)
         }
-        var navController: UINavigationController = self.tabBarController?.viewControllers?[1] as! UINavigationController
-        scheduleNotification(userID)
-        var injectBook = navController.viewControllers[0] as! InjectionBookAllViewController
-        //    [search initWithText:@"This is a test"];
-        injectBook.userID = sickRegister[0].userID
-        self.tabBarController!.selectedViewController = navController
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-    func scheduleNotification(userID:Int){
+        else
+        {
+            chooseAllbtn.setImage(UIImage(named: "ic_uncheck"), forState: nil)
+        }
         
-        //cancelNotification(userID)
-        println("bac")
-        dataManager.getInjectionBook(userID)
-        dataManager.getUserInfo()
-        for var i = 0; i <  dataManager.injectData.count; i++
+        for var i = 0; i < sickRegister.count; i++
+        {if self.ischooseALl == true
         {
-            var localNotification = UILocalNotification()
-            
-            localNotification.fireDate = dataManager.injectData[i].injectDate.dateByAddingTimeInterval(1)
-            
-            
-            let indexId = dataManager.injectData[i].sickID
-            
-            var dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "dd/MM/yyyy"
-            var daySubStr = dateFormatter.stringFromDate(dataManager.injectData[i].injectDate)
-            
-            var dayOfWeekInt = dataManager.injectData[i].injectDate.getDayOfWeek(daySubStr)
-            var dayOfWeekStr = String()
-            if dayOfWeekInt == 2
-            {
-                dayOfWeekStr = "Thứ 2"
-            }
-            else if dayOfWeekInt == 3
-            {
-                dayOfWeekStr = "Thứ 3"
-            }
-            else if dayOfWeekInt == 4
-            {
-                dayOfWeekStr = "Thứ 4"
-            }
-            else if dayOfWeekInt == 5
-            {
-                dayOfWeekStr = "Thứ 5"
-            }
-            else if dayOfWeekInt == 6
-            {
-                dayOfWeekStr = "Thứ 6"
-            }
-            else if dayOfWeekInt == 7
-            {
-                dayOfWeekStr = "Thứ 7"
-            }
-            else if dayOfWeekInt == 1
-            {
-                dayOfWeekStr = "Chủ nhật"
-            }
-            
-            localNotification.timeZone = NSTimeZone.defaultTimeZone()
-            var sickName: String = dataManager.dictSickInfo[indexId]!
-            localNotification.alertBody = "\(dayOfWeekStr) \(daySubStr)  tiêm  \(sickName)  mũi \(dataManager.injectData[i].number)"
-            localNotification.soundName = UILocalNotificationDefaultSoundName
-            localNotification.alertTitle = "Sổ tiêm " + dataManager.dictUserInfo[userID]!
-            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+             sickRegister[i].boolSelected = true
+            sickRegister[i].isSelected = 1
+
         }
+        else
+        {
+            sickRegister[i].boolSelected = false
+            sickRegister[i].isSelected = 1
+
+            }
+                    }
+        
+        tableView.reloadData()
     }
 
-}
+    
+    func saveInfoVaccine()->Bool
+    {
+        if gender == 0
+        {
+            if (sickRegister[2].isSelected == 1 &&  sickRegister[3].isSelected == 1) || (sickRegister[13].isSelected == 1 &&  sickRegister[14].isSelected == 1)
+            {
+                if sickRegister[2].isSelected == 1 &&  sickRegister[3].isSelected == 1
+                {
+                    
+                    let alert = UIAlertView(title:"Sổ tiêm chủng", message:"Bạn không được chọn cả 2 loại vắc xin Rota virus", delegate:nil, cancelButtonTitle: "OK")
+                    alert.show()
+                }
+                else if sickRegister[13].isSelected == 1 &&  sickRegister[14].isSelected == 1
+                {
+                    
+                    
+                    let alert = UIAlertView(title:"Sổ tiêm chủng", message:"Bạn không được chọn cả 2 loại vắc xin Ung thư cổ tử cung", delegate:nil, cancelButtonTitle: "OK")
+                    alert.show()
+                }
+                return false
+            }
+                
+            else
+            {
+                for sickRegisterInfo in sickRegister
+                {
+                    let sql = "UPDATE SickRegister SET Selected = '\(sickRegisterInfo.isSelected)' WHERE UserID = \(sickRegisterInfo.userID) AND SickID =  \(sickRegisterInfo.sickID)"
+                    let rc = db.execute(sql)
+                }
+              
+        
+                return true
+            }
+            
+        }
+        else
+        {
+            if sickRegister[2].isSelected == 1 &&  sickRegister[3].isSelected == 1
+            {
+                let alert = UIAlertView(title:"Sổ tiêm chủng", message:"Bạn không được chọn cả 2 loại vắc xin Rota virus", delegate:nil, cancelButtonTitle: "OK")
+                alert.show()
+                return false
+            }
+            else
+            {
+                for sickRegisterInfo in sickRegister
+                {
+                    let sql = "UPDATE SickRegister SET Selected = '\(sickRegisterInfo.isSelected)' WHERE UserID = \(sickRegisterInfo.userID) AND SickID =  \(sickRegisterInfo.sickID)"
+                    let rc = db.execute(sql)
+                }
+            
+                return true
+            }
+            
+        }
+    }
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        var isShow =  false
+        if identifier == "chooseDone"
+        {
+            if gender == 0
+            {
+                if (sickRegister[2].isSelected == 1 &&  sickRegister[3].isSelected == 1) || (sickRegister[13].isSelected == 1 &&  sickRegister[14].isSelected == 1)
+                {
+                    if sickRegister[2].isSelected == 1 &&  sickRegister[3].isSelected == 1
+                    {
+                        
+                        let alert = UIAlertView(title:"Sổ tiêm chủng", message:"Bạn không được chọn cả 2 loại vắc xin Rota virus", delegate:nil, cancelButtonTitle: "OK")
+                        alert.show()
+                    }
+                    else if sickRegister[13].isSelected == 1 &&  sickRegister[14].isSelected == 1
+                    {
+                        
+                        
+                        let alert = UIAlertView(title:"Sổ tiêm chủng", message:"Bạn không được chọn cả 2 loại vắc xin Ung thư cổ tử cung", delegate:nil, cancelButtonTitle: "OK")
+                        alert.show()
+                    }
+                    isShow = false
+                }
+                    
+                else
+                {
+                    isShow = true
+                }
+                
+            }
+            else
+            {
+                if sickRegister[2].isSelected == 1 &&  sickRegister[3].isSelected == 1
+                {
+                    let alert = UIAlertView(title:"Sổ tiêm chủng", message:"Bạn không được chọn cả 2 loại vắc xin Rota virus", delegate:nil, cancelButtonTitle: "OK")
+                    alert.show()
+                    isShow = false
+                }
+                else
+                {
+                    isShow = true
+                }
+                
+            }
+
+        }
+        return isShow
+    }
+    }

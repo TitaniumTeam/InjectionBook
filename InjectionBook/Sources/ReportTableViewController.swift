@@ -8,67 +8,109 @@
 
 import UIKit
 
-class ReportTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
+class ReportTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UIPopoverPresentationControllerDelegate {
 
         let dataManager = DataManager()
         var userID = 0
         var sickRegister = [String]()
         var sickNumber = [Int]()
         var sickRegisterInfo = [SickRegisterInfo]()
+        var index = 0
+        var sickReport = [[InjectionBookInfo]]()
 
     @IBOutlet weak var naviItem: UINavigationItem!
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.reloadData()
+         tableView.delegate = self
            }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red:138/255, green:189/255, blue:68/255, alpha:1)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         dataManager.getUserInfo()
         dataManager.getInjectionBook(userID)
         sickRegisterInfo = []
         sickRegister = []
-        
+
         if dataManager.userData.count > 0
         {
-            userID = dataManager.userData[0].userID
-            naviItem.title = "Sổ tiêm "+dataManager.dictUserInfo[userID]!
-            dataManager.getSickRegisterInfo(userID)
-            dataManager.getSickInfo()
-            dataManager.getInjectionBook(userID)
-            for var i = 0; i < dataManager.sickRegisterData.count; i++
+            if  userID == 0  || dataManager.getUserExist(userID) == 0
             {
-                if dataManager.sickRegisterData[i].isSelected == 1 && dataManager.sickRegisterData[i].isEnable == 1
+                dataManager.getUserInfo()
+                userID = dataManager.userData[0].userID
+                index = 0
+                userID = dataManager.userData[0].userID
+               naviItem.title = "Sổ tiêm "+(dataManager.userData[index].userName as String)
+                dataManager.getSickRegisterInfo(userID)
+                dataManager.getSickInfo()
+                dataManager.getInjectionBook(userID)
+                for var i = 0; i < dataManager.sickRegisterData.count; i++
                 {
-                    let id = dataManager.sickRegisterData[i].sickID
-                    sickRegister.append(dataManager.dictSickInfoCode[id]!)
-                    sickRegisterInfo.append(dataManager.sickRegisterData[i])
+                    if dataManager.sickRegisterData[i].isSelected == 1 && dataManager.sickRegisterData[i].isEnable == 1
+                    {
+                        let id = dataManager.sickRegisterData[i].sickID
+                        sickRegister.append(dataManager.dictSickInfoCode[id]!)
+                        sickRegisterInfo.append(dataManager.sickRegisterData[i])
+                    }
                 }
             }
+            else if  userID > 0
+            {
+                dataManager.getUserInfo()
+                naviItem.title = "Sổ tiêm "+(dataManager.userData[index].userName as String)
+                dataManager.getSickRegisterInfo(userID)
+                dataManager.getSickInfo()
+                dataManager.getInjectionBook(userID)
+                for var i = 0; i < dataManager.sickRegisterData.count; i++
+                {
+                    if dataManager.sickRegisterData[i].isSelected == 1 && dataManager.sickRegisterData[i].isEnable == 1
+                    {
+                        let id = dataManager.sickRegisterData[i].sickID
+                        sickRegister.append(dataManager.dictSickInfoCode[id]!)
+                        sickRegisterInfo.append(dataManager.sickRegisterData[i])
+                    }
+                }
+
+            }
+            tableView.reloadData()
+            tableView.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: true)
+            let buttonBack: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+            buttonBack.frame = CGRectMake(0, 0, 40, 40)
+            buttonBack.setImage(UIImage(named:"avatar_icon_boy"), forState: UIControlState.Normal)
+        
+            if  dataManager.dictUserGender[userID] == 0
+            {
+                buttonBack.setImage(UIImage(named:"avatar_icon_girl"), forState: UIControlState.Normal)
+            }
+        
+            buttonBack.addTarget(self, action: "leftNavButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+            buttonBack.backgroundColor = UIColor.whiteColor()
+            buttonBack.layer.cornerRadius = buttonBack.frame.height/2
+            var leftBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: buttonBack)
+            tableView.delegate = self
+            tableView.dataSource = self
+            self.navigationItem.setLeftBarButtonItem(leftBarButtonItem, animated: false)
+            
+          
+            
         }
         else
         {
-            
-        }
-        tableView.reloadData()
-        tableView.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: true)
-        let buttonBack: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-        buttonBack.frame = CGRectMake(0, 0, 40, 40)
-        buttonBack.setImage(UIImage(named:"avatar_icon_boy"), forState: UIControlState.Normal)
-        
-        if  dataManager.dictUserGender[userID] == 0
-        {
-            buttonBack.setImage(UIImage(named:"avatar_icon_girl"), forState: UIControlState.Normal)
+            let alert = UIAlertView(title:"Sổ tiêm chủng", message:"Bạn cần thêm bé trước", delegate:nil, cancelButtonTitle: "OK")
+            alert.show()
+            var navController: UINavigationController = self.tabBarController?.viewControllers?[0] as! UINavigationController
+            self.tabBarController!.selectedViewController = navController
+            self.navigationController?.popViewControllerAnimated(true)
+            self.dismissViewControllerAnimated(true, completion: nil)
+            //tableView.reloadData()
+            dataManager.resetData()
+            naviItem.title = "Không có dữ liệu"
         }
         
-        buttonBack.addTarget(self, action: "leftNavButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        buttonBack.backgroundColor = UIColor.whiteColor()
-        buttonBack.layer.cornerRadius = buttonBack.frame.height/2
-        var leftBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: buttonBack)
-        
-        self.navigationItem.setLeftBarButtonItem(leftBarButtonItem, animated: false)
-        tableView.reloadData()
-        
+    
     }
     
     func leftNavButtonClick(sender:UIButton!)
@@ -80,7 +122,7 @@ class ReportTableViewController: UITableViewController, UIPopoverPresentationCon
         viewController.popoverPresentationController?.delegate = self
         viewController.popoverPresentationController?.sourceView = sender
         viewController.popoverPresentationController?.permittedArrowDirections = .Any
-        viewController.preferredContentSize = CGSizeMake(275.0, 375.0)
+        viewController.preferredContentSize = CGSizeMake(275, 180)
         
         // Present the popoverViewController's view on screen
         self.presentViewController(viewController, animated: true, completion: nil)
@@ -99,30 +141,35 @@ class ReportTableViewController: UITableViewController, UIPopoverPresentationCon
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         return sickRegisterInfo.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ReportTableCell", forIndexPath: indexPath) as! ReportTableViewCell
-
-       cell.sickCode?.text = sickRegister[indexPath.row]
-       let id = sickRegisterInfo[indexPath.row].sickID
-        let today = NSDate()
-       
+        cell.sickCode?.text = sickRegister[indexPath.row]
+        for view in cell.injectView.subviews {
+            view.removeFromSuperview()
+            
+        }
+            let id = sickRegisterInfo[indexPath.row].sickID
+            dataManager.getInjectionBook(userID)
+            cell.sickID = id
+            let today = NSDate()
             for var i = 0;  i < dataManager.injectData.count ; i++
             {
-                if dataManager.injectData[i].sickID == id
+                if id == dataManager.injectData[i].sickID
                 {
+                    
                     var inject1 = MyCustomButton.buttonWithType(UIButtonType.Custom) as! MyCustomButton
                     var x   = CGFloat(30*dataManager.injectData[i].injectNumber)
                     inject1.frame = CGRectMake(x, 10, 25, 25)
@@ -137,35 +184,36 @@ class ReportTableViewController: UITableViewController, UIPopoverPresentationCon
                         {
                             images = UIImage(named: "ic_injection_disable")!
                         }
-
                     }
                     else
                     {
                         if dataManager.injectData[i].isInjection == 1
                         {
-                             images = UIImage(named: "ic_injection_green")!
+                            images = UIImage(named: "ic_injection_green")!
                         }
                         else
                         {
-                             images = UIImage(named: "ic_injection_red")!
+                            images = UIImage(named: "ic_injection_red")!
                         }
                     }
-                    inject1.setImage(images, forState: UIControlState.Normal)
-                    inject1.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
-                    
-                    inject1.sickID = dataManager.injectData[i].sickID
-                    inject1.numberInject = dataManager.injectData[i].number
-                    inject1.nameInject = dataManager.injectData[i].vaccineName
-                    inject1.dateInject = dataManager.injectData[i].injectDate
-                    inject1.isInject = dataManager.injectData[i].isInjection
-                    inject1.note = dataManager.injectData[i].note
-                    
-                    cell.injectView.addSubview(inject1)
-                }
+
+                        
+                        inject1.setImage(images, forState: UIControlState.Normal)
+                        inject1.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+                        
+                        inject1.sickID = dataManager.injectData[i].sickID
+                        inject1.numberInject = dataManager.injectData[i].number
+                        inject1.nameInject = dataManager.injectData[i].vaccineName
+                        inject1.dateInject = dataManager.injectData[i].injectDate
+                        inject1.isInject = dataManager.injectData[i].isInjection
+                        inject1.note = dataManager.injectData[i].note
+                        
+                        cell.injectView.addSubview(inject1)
+
+                    }
+            
             }
-        
         return cell
-        
     }
     func buttonAction(sender:MyCustomButton!)
     {
@@ -252,16 +300,24 @@ class ReportTableViewController: UITableViewController, UIPopoverPresentationCon
             var sourceViewController: ChooseUserTableViewController = segue.sourceViewController as! ChooseUserTableViewController
             userID = sourceViewController.userID
             
-            
-            println(userID)
+            index = sourceViewController.chooseRow
 
-            var name: String = dataManager.dictUserInfo[userID]!
-            self.naviItem.title = "Sổ tiêm \(name)"
+
+          //  var name: String = dataManager.dictUserInfo[userID]!
+            var name: String = dataManager.userData[sourceViewController.chooseRow].userName as String
             
             self.tableView.reloadData()
             self.viewWillAppear(true)
             // Dismiss the PopoverViewController's view
             self.dismissViewControllerAnimated(false, completion: nil)
+            
+            var navController: UINavigationController = self.tabBarController?.viewControllers?[1] as! UINavigationController
+            
+            var injectBook = navController.viewControllers[0] as! InjectionBookAllViewController
+            //    [search initWithText:@"This is a test"];
+            injectBook.userID = userID
+            injectBook.index = index
+
         }
     }
 

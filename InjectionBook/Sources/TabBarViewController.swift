@@ -18,6 +18,5 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         super.viewWillAppear(true)
         
         self.navigationController?.popViewControllerAnimated(true)
-        println("show")
     }
 }

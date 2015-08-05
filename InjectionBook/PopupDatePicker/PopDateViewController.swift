@@ -13,7 +13,7 @@ protocol DataPickerViewControllerDelegate : class {
     func datePickerVCDismissed(date : NSDate?)
 }
 
-class PopDateViewController : UIViewController {
+class PopDateViewController : UIViewController,UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var container: UIView!
     @IBOutlet weak var datePicker: UIDatePicker!

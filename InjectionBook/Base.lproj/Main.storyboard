@@ -8,7 +8,7 @@
         <!--Tab Bar View Controller-->
         <scene sceneID="1QL-lF-wdw">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="x0G-jE-7Z0" customClass="TabBarViewController" customModule="InjectionBook" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="x0G-jE-7Z0" customClass="TabBarViewController" customModule="Sổ_tiêm_chủng" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
@@ -19,7 +19,7 @@
                     <connections>
                         <segue destination="jk8-iS-jwP" kind="relationship" relationship="viewControllers" id="I4n-kv-Ds4"/>
                         <segue destination="nf8-8e-VeR" kind="relationship" relationship="viewControllers" id="JgH-mH-L1M"/>
-                        <segue destination="9pw-sa-Lcq" kind="relationship" relationship="viewControllers" id="rOJ-rs-oXr"/>
+                        <segue destination="y6v-Qf-507" kind="relationship" relationship="viewControllers" id="Cke-8t-CEV"/>
                         <segue destination="aTu-iI-gL4" kind="relationship" relationship="viewControllers" id="XQJ-87-TlS"/>
                     </connections>
                 </tabBarController>
@@ -30,7 +30,7 @@
         <!--Title-->
         <scene sceneID="fKE-Nh-k2m">
             <objects>
-                <viewController storyboardIdentifier="InjectBookID" id="1Ew-Uw-VBc" customClass="InjectionBookAllViewController" customModule="InjectionBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InjectBookID" id="1Ew-Uw-VBc" customClass="InjectionBookAllViewController" customModule="Sổ_tiêm_chủng" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="So8-52-SJH"/>
                         <viewControllerLayoutGuide type="bottom" id="j8r-uG-RjN"/>
@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="93" width="319" height="338"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="InjectionBookCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="InjectionBookCell" id="vgn-MK-IBf" customClass="InjectionBookTableViewCell" customModule="InjectionBook" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="InjectionBookCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="InjectionBookCell" id="vgn-MK-IBf" customClass="InjectionBookTableViewCell" customModule="Sổ_tiêm_chủng" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vgn-MK-IBf" id="txu-Zd-waT">
@@ -110,7 +110,9 @@
                             <constraint firstItem="XYy-Tc-ehj" firstAttribute="top" secondItem="So8-52-SJH" secondAttribute="bottom" id="pfV-A1-gKV"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="Qw9-NX-yW2"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="naviItem" destination="Qw9-NX-yW2" id="hUo-sZ-hTX"/>
@@ -120,12 +122,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nco-Ec-a3Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="776" y="1400"/>
+            <point key="canvasLocation" x="780" y="1500"/>
         </scene>
-        <!--Edit User View Controller-->
+        <!--Sửa thông tin-->
         <scene sceneID="k1N-0L-FmH">
             <objects>
-                <viewController id="jvq-Mt-lXH" customClass="EditUserViewController" customModule="InjectionBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jvq-Mt-lXH" customClass="EditUserViewController" customModule="Sổ_tiêm_chủng" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yDu-si-NIw"/>
                         <viewControllerLayoutGuide type="bottom" id="3N9-xY-QZ8"/>
@@ -183,7 +185,7 @@
                                         </state>
                                         <connections>
                                             <action selector="saveEditUser:" destination="jvq-Mt-lXH" eventType="touchUpInside" id="pSU-KJ-Xf3"/>
-                                            <segue destination="sLG-6k-mtG" kind="push" id="u0e-5x-8ka"/>
+                                            <segue destination="nP5-WI-cxc" kind="unwind" identifier="editDone" unwindAction="unwindFromModalViewController:" id="5dk-R8-KPC"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HoW-FH-Sga">
@@ -221,7 +223,9 @@
                             <constraint firstItem="3N9-xY-QZ8" firstAttribute="top" secondItem="218-oj-DIz" secondAttribute="bottom" id="wET-lG-xOY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="4l4-XD-djn"/>
+                    <navigationItem key="navigationItem" title="Sửa thông tin" id="4l4-XD-djn">
+                        <barButtonItem key="backBarButtonItem" title=" " id="S6l-Kd-wyY"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="genderLabel" destination="BOg-n8-DfP" id="ro0-4r-iyN"/>
@@ -231,19 +235,21 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7T-ku-1Di" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="nP5-WI-cxc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-798" y="1424"/>
         </scene>
-        <!--List User Table View Controller-->
+        <!--Item-->
         <scene sceneID="NOB-9J-1bt">
             <objects>
-                <tableViewController id="sLG-6k-mtG" customClass="ListUserTableViewController" customModule="InjectionBook" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="sLG-6k-mtG" customClass="ListUserTableViewController" customModule="Sổ_tiêm_chủng" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="1ii-1s-Iod">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" red="0.4556757776" green="0.70720880679999998" blue="0.20414274839999999" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListUserCell" rowHeight="55" id="EQO-lg-90J" customClass="ListUserTableViewCell" customModule="InjectionBook" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListUserCell" rowHeight="55" id="EQO-lg-90J" customClass="ListUserTableViewCell" customModule="Sổ_tiêm_chủng" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EQO-lg-90J" id="dWg-Cc-SX3">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -277,9 +283,12 @@
                             <outlet property="delegate" destination="sLG-6k-mtG" id="bXJ-53-b5W"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" id="Rvt-s1-JqP"/>
                     <navigationItem key="navigationItem" id="6vw-i7-79d">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" image="add_user_icon" id="lJE-sW-w7r">
+                        <barButtonItem key="backBarButtonItem" title=" " id="3IW-F0-Kc6"/>
+                        <barButtonItem key="leftBarButtonItem" image="add_user_icon" id="lJE-sW-w7r">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="Xvz-37-9HN" kind="show" identifier="" id="F9r-3F-oYN"/>
                             </connections>
@@ -291,16 +300,17 @@
                         <segue destination="xab-db-fsx" kind="show" identifier="ChooseVaccine" id="MrO-ju-lD7"/>
                         <segue destination="jvq-Mt-lXH" kind="show" identifier="EditUser" id="enM-ev-4et"/>
                         <segue destination="Xvz-37-9HN" kind="showDetail" identifier="AddFirtUser" id="EcR-QM-DTI"/>
+                        <segue destination="oXR-iv-1WY" kind="show" identifier="AddUser" id="ZBZ-5u-4C6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="las-tg-SfE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="1465"/>
+            <point key="canvasLocation" x="192" y="1453"/>
         </scene>
-        <!--Add User View Controller-->
+        <!--Item-->
         <scene sceneID="9t0-H1-15b">
             <objects>
-                <viewController id="oXR-iv-1WY" customClass="AddUserViewController" customModule="InjectionBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oXR-iv-1WY" customClass="AddUserViewController" customModule="Sổ_tiêm_chủng" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b22-gO-th1"/>
                         <viewControllerLayoutGuide type="bottom" id="dUT-pB-xSx"/>
@@ -381,9 +391,12 @@
                             <constraint firstItem="CoQ-p9-SgA" firstAttribute="trailing" secondItem="rj1-Ad-3z1" secondAttribute="trailingMargin" id="xrM-oZ-J5B"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="7EZ-62-y04"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="Dmo-Zd-9fo"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationItem key="navigationItem" id="Dmo-Zd-9fo">
+                        <barButtonItem key="backBarButtonItem" title=" " id="gJ5-d5-MK5"/>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="userAvatar" destination="zzn-pS-Gv3" id="9Z4-T4-Wr0"/>
@@ -395,12 +408,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oqe-d7-PKW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-442" y="1920"/>
+            <point key="canvasLocation" x="-486" y="1824"/>
         </scene>
-        <!--Item-->
+        <!--Choose Vaccine Controller-->
         <scene sceneID="2QQ-0L-RJW">
             <objects>
-                <viewController id="xab-db-fsx" customClass="ChooseVaccineController" customModule="InjectionBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xab-db-fsx" customClass="ChooseVaccineController" customModule="Sổ_tiêm_chủng" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tb1-aR-mTe"/>
                         <viewControllerLayoutGuide type="bottom" id="QpC-Ng-f13"/>
@@ -417,6 +430,9 @@
                                         <state key="normal" image="ic_uncheck">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="chooseAll:" destination="xab-db-fsx" eventType="touchUpInside" id="ou4-Q5-BxZ"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Chọn tất cả" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WS9-0t-8SG">
                                         <rect key="frame" x="42" y="3" width="270" height="21"/>
@@ -431,7 +447,7 @@
                                 <rect key="frame" x="0.0" y="91" width="320" height="345"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChooseVaccineCell" id="APY-cG-IhL" customClass="ChooseVaccineViewCell" customModule="InjectionBook" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChooseVaccineCell" id="APY-cG-IhL" customClass="ChooseVaccineViewCell" customModule="Sổ_tiêm_chủng" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="APY-cG-IhL" id="piO-Gw-ER6">
@@ -467,94 +483,136 @@
                             <constraint firstItem="4kX-CN-vHM" firstAttribute="leading" secondItem="2gp-4e-DMT" secondAttribute="leadingMargin" constant="-16" id="plX-NY-g14"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="kOU-mg-fSu"/>
                     <navigationItem key="navigationItem" id="4sk-60-HjA">
-                        <barButtonItem key="rightBarButtonItem" image="ic_btn_save" id="KTW-RP-qtO">
+                        <barButtonItem key="leftBarButtonItem" image="ic_btn_save" id="KTW-RP-qtO">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="btnSaveVaccine:" destination="xab-db-fsx" id="NIp-8B-Gdf"/>
+                                <segue destination="88A-c1-Tby" kind="unwind" identifier="chooseDone" unwindAction="unwindFromModalViewController:" id="Y4w-Cn-gvI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="chooseAllbtn" destination="WfK-Si-sWG" id="g9c-N0-Y5j"/>
                         <outlet property="tableView" destination="4kX-CN-vHM" id="Ltc-2L-Ckq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rCc-rf-WjN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="88A-c1-Tby" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-89" y="2192"/>
+            <point key="canvasLocation" x="-442" y="2498"/>
         </scene>
         <!--Title-->
-        <scene sceneID="eJj-ot-zKJ">
+        <scene sceneID="tMn-0L-Cwb">
             <objects>
-                <tableViewController id="eXn-nU-3VG" customClass="ReportTableViewController" customModule="InjectionBook" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0jI-LS-fNA">
+                <viewController id="z4Q-6a-DVB" customClass="ReportTableViewController" customModule="Sổ_tiêm_chủng" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IKm-qc-YR8"/>
+                        <viewControllerLayoutGuide type="bottom" id="0yr-VP-1L9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tug-we-TWW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4a-D6-akC">
+                                <rect key="frame" x="0.0" y="407" width="320" height="24"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Chưa tiêm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wc-mS-Z78">
+                                        <rect key="frame" x="37" y="0.0" width="137" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Đã tiêm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-IG-8W9">
+                                        <rect key="frame" x="132" y="0.0" width="94" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Bỏ lỡ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BXm-VS-PRM">
+                                        <rect key="frame" x="205" y="0.0" width="107" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_injection_disable" translatesAutoresizingMaskIntoConstraints="NO" id="H1C-WT-bMj">
+                                        <rect key="frame" x="8" y="0.0" width="21" height="21"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_injection_green" translatesAutoresizingMaskIntoConstraints="NO" id="TJp-Rz-nsz">
+                                        <rect key="frame" x="103" y="0.0" width="21" height="21"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_injection_red" translatesAutoresizingMaskIntoConstraints="NO" id="8fa-Jv-z5A">
+                                        <rect key="frame" x="182" y="0.0" width="21" height="21"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="3wc-mS-Z78" secondAttribute="bottom" constant="3" id="0Xw-Kc-fBG"/>
+                                    <constraint firstItem="A8e-IG-8W9" firstAttribute="top" secondItem="a4a-D6-akC" secondAttribute="top" id="0be-UV-LcF"/>
+                                    <constraint firstItem="3wc-mS-Z78" firstAttribute="top" secondItem="a4a-D6-akC" secondAttribute="top" id="Cxd-uX-Xey"/>
+                                    <constraint firstAttribute="bottom" secondItem="BXm-VS-PRM" secondAttribute="bottom" constant="3" id="E4A-vG-jKk"/>
+                                    <constraint firstAttribute="bottom" secondItem="A8e-IG-8W9" secondAttribute="bottom" constant="3" id="jxU-gM-SC6"/>
+                                    <constraint firstItem="BXm-VS-PRM" firstAttribute="top" secondItem="a4a-D6-akC" secondAttribute="top" id="mTj-Qf-bw8"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="pkW-Ek-53L">
+                                <rect key="frame" x="0.0" y="64" width="320" height="343"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReportTableCell" id="OhK-GA-3Rp" customClass="ReportTableViewCell" customModule="Sổ_tiêm_chủng" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OhK-GA-3Rp" id="DoV-hT-Dt6">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNh-tH-sl8">
+                                                    <rect key="frame" x="8" y="0.0" width="55" height="43"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nAm-cc-gcd">
+                                                    <rect key="frame" x="58" y="0.0" width="254" height="43"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="injectView" destination="nAm-cc-gcd" id="lc4-rG-8Iy"/>
+                                            <outlet property="sickCode" destination="UNh-tH-sl8" id="pi5-qf-8rJ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReportTableCell" id="jkF-5o-dzM" customClass="ReportTableViewCell" customModule="InjectionBook" customModuleProvider="target">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jkF-5o-dzM" id="Ixe-Xq-fgT">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exv-Ju-Iew">
-                                            <rect key="frame" x="8" y="0.0" width="58" height="43"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzX-Rc-eaa">
-                                            <rect key="frame" x="74" y="0.0" width="246" height="43"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="injectView" destination="gzX-Rc-eaa" id="VHJ-MX-bhZ"/>
-                                    <outlet property="sickCode" destination="Exv-Ju-Iew" id="wRV-bj-aat"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="eXn-nU-3VG" id="4bb-3m-4VK"/>
-                            <outlet property="delegate" destination="eXn-nU-3VG" id="076-gi-RmS"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="BM5-OZ-2Tp"/>
+                        <constraints>
+                            <constraint firstItem="pkW-Ek-53L" firstAttribute="top" secondItem="IKm-qc-YR8" secondAttribute="bottom" id="1g7-Et-ZrS"/>
+                            <constraint firstItem="a4a-D6-akC" firstAttribute="leading" secondItem="tug-we-TWW" secondAttribute="leadingMargin" constant="-16" id="EwR-QE-1cC"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="pkW-Ek-53L" secondAttribute="bottom" constant="73" id="Ku9-AQ-NBR"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="a4a-D6-akC" secondAttribute="bottom" constant="49" id="NRs-7d-qNR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pkW-Ek-53L" secondAttribute="trailing" constant="-16" id="k3N-WL-Tom"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="a4a-D6-akC" secondAttribute="trailing" constant="-16" id="r0p-y9-lYE"/>
+                            <constraint firstItem="pkW-Ek-53L" firstAttribute="leading" secondItem="tug-we-TWW" secondAttribute="leadingMargin" constant="-16" id="zMY-Er-9ea"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="gT4-wf-wvq"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="naviItem" destination="BM5-OZ-2Tp" id="iNU-mn-V6j"/>
+                        <outlet property="naviItem" destination="gT4-wf-wvq" id="u8w-sF-Nqm"/>
+                        <outlet property="tableView" destination="pkW-Ek-53L" id="kPw-ls-ZRy"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8OW-Ae-0MY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TCl-5c-FZc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1219" y="1419"/>
-        </scene>
-        <!--Báo cáo-->
-        <scene sceneID="HNb-5e-W3Y">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9pw-sa-Lcq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Báo cáo" image="report_icon" id="B5q-oO-H7z"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G7R-hn-Ddl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="eXn-nU-3VG" kind="relationship" relationship="rootViewController" id="5PL-an-67Q"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iYu-1V-9a0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1219" y="825"/>
+            <point key="canvasLocation" x="1456" y="1434"/>
         </scene>
         <!--Injection Schedule Table View Controller-->
         <scene sceneID="ehf-jK-hIH">
             <objects>
-                <tableViewController id="bRX-5H-hdc" customClass="InjectionScheduleTableViewController" customModule="InjectionBook" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="bRX-5H-hdc" customClass="InjectionScheduleTableViewController" customModule="Sổ_tiêm_chủng" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6Wo-OC-ocA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -590,7 +648,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UGe-DZ-bjW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1589" y="1419"/>
+            <point key="canvasLocation" x="2401" y="1419"/>
         </scene>
         <!--Lịch tiêm-->
         <scene sceneID="fnn-vs-342">
@@ -609,7 +667,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aal-il-hG4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1589" y="825"/>
+            <point key="canvasLocation" x="2401" y="825"/>
         </scene>
         <!--Danh sách bé-->
         <scene sceneID="I3I-aZ-PVK">
@@ -647,12 +705,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9aB-pI-TdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="2217"/>
+            <point key="canvasLocation" x="48" y="2209"/>
         </scene>
         <!--Chi tiết mũi tiêm-->
         <scene sceneID="HxJ-wv-sgM">
             <objects>
-                <viewController id="hai-CG-PYd" customClass="EditInjectViewController" customModule="InjectionBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hai-CG-PYd" customClass="EditInjectViewController" customModule="Sổ_tiêm_chủng" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O0s-z8-x5a"/>
                         <viewControllerLayoutGuide type="bottom" id="ZwY-Ar-CJE"/>
@@ -664,6 +722,44 @@
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vE6-f4-p8G">
                                 <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6c-y5-uBq">
+                                        <rect key="frame" x="165" y="243" width="142" height="30"/>
+                                        <color key="backgroundColor" red="0.38519358409999999" green="0.60775726009999997" blue="0.16043444439999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="142" id="FZT-Yz-az5"/>
+                                            <constraint firstAttribute="height" constant="30" id="t2T-uE-yxM"/>
+                                        </constraints>
+                                        <state key="normal" title="Lưu">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveEdit:" destination="hai-CG-PYd" eventType="touchUpInside" id="LFo-8f-Df3"/>
+                                            <segue destination="1Ew-Uw-VBc" kind="push" id="jXL-Jr-gxj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTb-6x-w3h">
+                                        <rect key="frame" x="13" y="243" width="142" height="30"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="5W1-LV-pMB"/>
+                                            <constraint firstAttribute="width" constant="142" id="ad6-Um-2pA"/>
+                                        </constraints>
+                                        <state key="normal" title="Đóng">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelEdit:" destination="hai-CG-PYd" eventType="touchUpInside" id="me8-ek-DLM"/>
+                                            <segue destination="1Ew-Uw-VBc" kind="show" id="7OW-a0-0E2"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3a8-xX-Ix0">
+                                        <rect key="frame" x="8" y="17" width="304" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.38519358409999999" green="0.60775726009999997" blue="0.16043444439999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8OW-Ne-zqY">
                                         <rect key="frame" x="13" y="46" width="294" height="189"/>
                                         <subviews>
@@ -743,44 +839,6 @@
                                             <constraint firstAttribute="bottom" secondItem="1Je-Mb-kdX" secondAttribute="bottom" constant="8" id="x7R-kI-1Fj"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6c-y5-uBq">
-                                        <rect key="frame" x="165" y="243" width="142" height="30"/>
-                                        <color key="backgroundColor" red="0.38519358409999999" green="0.60775726009999997" blue="0.16043444439999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="142" id="FZT-Yz-az5"/>
-                                            <constraint firstAttribute="height" constant="30" id="t2T-uE-yxM"/>
-                                        </constraints>
-                                        <state key="normal" title="Lưu">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="saveEdit:" destination="hai-CG-PYd" eventType="touchUpInside" id="LFo-8f-Df3"/>
-                                            <segue destination="1Ew-Uw-VBc" kind="push" id="erK-sc-zBF"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTb-6x-w3h">
-                                        <rect key="frame" x="13" y="243" width="142" height="30"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="5W1-LV-pMB"/>
-                                            <constraint firstAttribute="width" constant="142" id="ad6-Um-2pA"/>
-                                        </constraints>
-                                        <state key="normal" title="Đóng">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="cancelEdit:" destination="hai-CG-PYd" eventType="touchUpInside" id="me8-ek-DLM"/>
-                                            <segue destination="1Ew-Uw-VBc" kind="push" id="hSY-u9-vpg"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3a8-xX-Ix0">
-                                        <rect key="frame" x="8" y="17" width="304" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.38519358409999999" green="0.60775726009999997" blue="0.16043444439999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -815,22 +873,23 @@
                         <outlet property="noteInject" destination="Jm2-Ix-Gbk" id="j0k-BQ-Np5"/>
                         <outlet property="numberInject" destination="IgT-oo-umw" id="msi-ZF-lhY"/>
                         <outlet property="sickName" destination="3a8-xX-Ix0" id="alP-jM-C0S"/>
+                        <segue destination="xab-db-fsx" kind="show" identifier="ChooseVaccine" id="R46-Hd-hgi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XGq-Ng-8aH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="702" y="2375"/>
+            <point key="canvasLocation" x="614" y="2229"/>
         </scene>
         <!--Choose User Table View Controller-->
         <scene sceneID="BJg-A7-EB0">
             <objects>
-                <tableViewController storyboardIdentifier="idPopover" modalPresentationStyle="currentContext" id="9zC-qB-muY" customClass="ChooseUserTableViewController" customModule="InjectionBook" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yFY-Z6-CCm">
+                <tableViewController storyboardIdentifier="idPopover" modalPresentationStyle="currentContext" id="9zC-qB-muY" customClass="ChooseUserTableViewController" customModule="Sổ_tiêm_chủng" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="53" sectionHeaderHeight="22" sectionFooterHeight="22" id="yFY-Z6-CCm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellUser" id="kuv-Nm-3Tm" customClass="ChooseUserTableViewCell" customModule="InjectionBook" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellUser" rowHeight="53" id="kuv-Nm-3Tm" customClass="ChooseUserTableViewCell" customModule="Sổ_tiêm_chủng" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kuv-Nm-3Tm" id="OCI-Kr-D2X">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -864,7 +923,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gn8-3M-DT5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="0OA-KM-LFq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1044" y="1412"/>
+            <point key="canvasLocation" x="1218" y="1996"/>
         </scene>
         <!--Sổ tiêm-->
         <scene sceneID="xb1-eB-Znj">
@@ -905,6 +964,43 @@
             </objects>
             <point key="canvasLocation" x="-791" y="2773"/>
         </scene>
+        <!--Báo cáo-->
+        <scene sceneID="Rqg-NF-pOK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="y6v-Qf-507" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Báo cáo" image="report_icon" id="heY-hz-K5R"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rtR-tP-haK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="z4Q-6a-DVB" kind="relationship" relationship="rootViewController" id="DMM-MR-Mv8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Rd-pB-Hrp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1227" y="825"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="r7s-ct-Kg6">
+            <objects>
+                <viewController id="fSP-0X-u0p" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cL3-Ml-vJL"/>
+                        <viewControllerLayoutGuide type="bottom" id="ynX-0z-k2J"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ne7-54-uE5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jl9-iK-Yma" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="26" y="56"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add_user_icon" width="32" height="32"/>
@@ -912,16 +1008,20 @@
         <image name="customer_icon" width="32" height="30"/>
         <image name="ic_btn_save" width="32" height="32"/>
         <image name="ic_injection" width="96" height="96"/>
+        <image name="ic_injection_disable" width="64" height="64"/>
+        <image name="ic_injection_green" width="64" height="64"/>
+        <image name="ic_injection_red" width="64" height="64"/>
         <image name="ic_uncheck" width="48" height="48"/>
         <image name="ijnection_icon" width="32" height="32"/>
         <image name="report_icon" width="32" height="32"/>
         <image name="schedule_icon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6eu-ch-oPh"/>
-        <segue reference="F9r-3F-oYN"/>
+        <segue reference="PZE-KT-crz"/>
         <segue reference="xuN-rz-7Wb"/>
-        <segue reference="hSY-u9-vpg"/>
+        <segue reference="ZBZ-5u-4C6"/>
+        <segue reference="B6p-qu-9NR"/>
+        <segue reference="EcR-QM-DTI"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.4556757776" green="0.70720880679999998" blue="0.20414274839999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>

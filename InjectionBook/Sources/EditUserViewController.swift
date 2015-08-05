@@ -17,16 +17,17 @@ class EditUserViewController: UIViewController , UITextFieldDelegate{
     @IBOutlet weak var userAvatar: UIImageView!
     
     let db = SQLiteDB.sharedInstance()
-    var popDatePicker : PopDatePicker?
+ //   var popDatePicker : PopDatePicker?
     var gender = Int()
     var userName = String()
     var userBD = NSDate()
     var userID = Int()
     let dataManager = DataManager()
-    
+    let localNotification = LocalNotification()
+    var done = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        done = 0
         userAvatar.layer.cornerRadius = 10
         
         userNameTF.text = userName
@@ -44,8 +45,19 @@ class EditUserViewController: UIViewController , UITextFieldDelegate{
             userAvatar.image = UIImage(named: "avatar_icon_girl")
             genderLabel.text = "Giới tính: Nữ"
         }
-        popDatePicker = PopDatePicker(forTextField: userBDTF)
+   //     popDatePicker = PopDatePicker(forTextField: userBDTF)
         userBDTF.delegate = self
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationItem.title = "Sửa thông tin"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+    }
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
     }
     func resign() {
         userBDTF.resignFirstResponder()
@@ -59,13 +71,13 @@ class EditUserViewController: UIViewController , UITextFieldDelegate{
             formatter.timeStyle = .NoStyle
             let initDate : NSDate? = formatter.dateFromString(userBDTF.text)
             
-            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
-                self.userBD = newDate
-                // here we don't use self (no retain cycle)
-                forTextField.text = (newDate.ToDateMediumString() ?? "?") as String
-                
-            }
-            popDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
+//            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
+//                self.userBD = newDate
+//                // here we don't use self (no retain cycle)
+//                forTextField.text = (newDate.ToDateMediumString() ?? "?") as String
+//                
+//            }
+//            popDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
             return false
         }
         else {
@@ -102,11 +114,11 @@ class EditUserViewController: UIViewController , UITextFieldDelegate{
             formatter.timeStyle = .NoStyle
             let initDate : NSDate? = formatter.dateFromString(userBDTF.text)
             
-            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
-                forTextField.text = (newDate.ToDateMediumString() ?? "?") as String
-                self.userBD = newDate
-            }
-            popDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
+//            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
+//                forTextField.text = (newDate.ToDateMediumString() ?? "?") as String
+//                self.userBD = newDate
+//            }
+//            popDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
         }
         else {
             let db = SQLiteDB.sharedInstance()
@@ -122,7 +134,7 @@ class EditUserViewController: UIViewController , UITextFieldDelegate{
             dataManager.getInjectionBook(userID)
             
             let numberRecordBook = dataManager.injectData.last!.id
-            println(numberRecordBook)
+        
             let idBook = numberRecordBook - dataManager.injectData.count+1
             for var index = 0; index < dataManager.injectionScheduleData.count; index++
             {
@@ -133,6 +145,26 @@ class EditUserViewController: UIViewController , UITextFieldDelegate{
                 let sql = "UPDATE InjectionBook SET InjectionDate = '\(tomorrow)' WHERE InjectionBookID = \(idBook+index)"
                 let rc = db.execute(sql)
             }
+            var isDone = 0
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0), { ()->() in
+                println("gcd hello")
+                dispatch_async(dispatch_get_main_queue(), {
+                    isDone = self.localNotification.scheduleNotification(self.userID)
+                    
+                    if isDone > 0
+                    {
+                        println("done")
+                        FVCustomAlertView.shareInstance.hideAlertFromView(self.view, fading: true)
+                    }
+                    
+                    
+                    
+                })
+                
+            })
+            FVCustomAlertView.shareInstance.showDefaultLoadingAlertOnView(self.view, withTitle: "Đang nhập dữ liệu")
+
         }
     }
 }

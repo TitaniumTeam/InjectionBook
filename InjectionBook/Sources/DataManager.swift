@@ -39,6 +39,9 @@ class DataManager: NSObject {
     var dictSickInfo = Dictionary<Int,String>()
     var dictSickInfoCode = Dictionary<Int,String>()
     var dictUserInfo = Dictionary<Int,String>()
+    
+    
+    
     func getDataFromTable(tableName: String) -> [SQLRow]{
         var data = [SQLRow]()
         data = db.query("SELECT * FROM "+tableName)
@@ -49,10 +52,19 @@ class DataManager: NSObject {
         let sql = "DELETE FROM USER WHERE UserID="+"\(id)"
         let rc = db.execute(sql)
     }
+    func getUserExist(id: Int)-> Int
+    {
+        var data = [SQLRow]()
+        data = db.query("SELECT * FROM User WHERE UserID=\(id)")
+        return data.count
+    }
     func getUserInfo()
     {
         userData = []
         var data = [SQLRow]()
+        dictUserGender = Dictionary<Int,Int>()
+        dictUserInfo = Dictionary<Int,String>()
+        
         data = db.query("SELECT * FROM User")
         for var index = 0; index < data.count; index++
         {
@@ -81,7 +93,10 @@ class DataManager: NSObject {
     }
     func getSickInfo()
     {
+        dictUserInfo = Dictionary<Int,String>()
+        dictSickInfoCode = Dictionary<Int,String>()
         var data = [SQLRow]()
+        sickData = []
         data = db.query("SELECT * FROM Sick")
         for var index = 0; index < data.count; index++
         {
@@ -107,12 +122,13 @@ class DataManager: NSObject {
             sickData.append(sickInfo)
             sickInfo = SickInfo()
         }
-       
+        
     }
     func getInjectionSchedudleInfo()
     {
         injectionScheduleData = []
         var data = [SQLRow]()
+        injectionName = []
         data = db.query("SELECT * FROM InjectionSchedule")
         for var index = 0; index < data.count; index++
         {
@@ -131,6 +147,7 @@ class DataManager: NSObject {
             }
             injectionScheduleData.append(injectionScheduleInfo)
             injectionScheduleInfo = InjectionScheduleInfo()
+            
         }
         
         for var i = 0; i <  injectionScheduleData.count; i++
@@ -143,14 +160,14 @@ class DataManager: NSObject {
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 2
             {
                 injectSection.append(  injectionScheduleData[i].sickID)
-               
-               
+                
+                
             }
             
         }
@@ -164,10 +181,10 @@ class DataManager: NSObject {
                 
                 
             }
-                  }
+        }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 4
@@ -175,40 +192,40 @@ class DataManager: NSObject {
                 injectSection.append(  injectionScheduleData[i].sickID)
                 
             }
-                    }
+        }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {   if   injectionScheduleData[i].subMoth == 6
         {
             injectSection.append(  injectionScheduleData[i].sickID)
-                        }
-        
+            }
+            
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         { if   injectionScheduleData[i].subMoth == 7
         {
             injectSection.append(  injectionScheduleData[i].sickID)
-                        }
-                 }
+            }
+        }
         injectionName.append(injectSection)
         injectSection = [Int]()
         
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         { if   injectionScheduleData[i].subMoth == 9
         {
             injectSection.append(  injectionScheduleData[i].sickID)
-                        }
-                  }
+            }
+        }
         injectionName.append(injectSection)
         injectSection = [Int]()
         
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 12
@@ -216,7 +233,7 @@ class DataManager: NSObject {
                 injectSection.append(  injectionScheduleData[i].sickID)
                 
             }
-          
+            
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
@@ -224,12 +241,12 @@ class DataManager: NSObject {
         { if   injectionScheduleData[i].subMoth == 15
         {
             injectSection.append(  injectionScheduleData[i].sickID)
-                        }
-               }
+            }
+        }
         injectionName.append(injectSection)
         injectSection = [Int]()
         
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 16
@@ -237,39 +254,39 @@ class DataManager: NSObject {
                 injectSection.append(  injectionScheduleData[i].sickID)
                 
             }
-          }
+        }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 18
             {
                 injectSection.append(  injectionScheduleData[i].sickID)
-                            }
-    
+            }
+            
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 19
             {
                 injectSection.append(  injectionScheduleData[i].sickID)
-                            }
-   
+            }
+            
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         { if   injectionScheduleData[i].subMoth == 24
         {
             injectSection.append(  injectionScheduleData[i].sickID)
-           
+            
             }
-
+            
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
@@ -278,9 +295,9 @@ class DataManager: NSObject {
             if   injectionScheduleData[i].subMoth == 31
             {
                 injectSection.append(  injectionScheduleData[i].sickID)
-                           }
-  
-
+            }
+            
+            
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
@@ -289,32 +306,32 @@ class DataManager: NSObject {
             if   injectionScheduleData[i].subMoth == 43
             {
                 injectSection.append(  injectionScheduleData[i].sickID)
-                          }
-         }
+            }
+        }
         injectionName.append(injectSection)
         injectSection = [Int]()
         
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 60
             {
                 injectSection.append(  injectionScheduleData[i].sickID)
-               }
+            }
             
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 63            {
                 injectSection.append(  injectionScheduleData[i].sickID)
-                 }
+            }
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 96
@@ -324,17 +341,17 @@ class DataManager: NSObject {
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 108
             {
                 injectSection.append(  injectionScheduleData[i].sickID)
-              }
+            }
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 110
@@ -344,13 +361,13 @@ class DataManager: NSObject {
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 111
             {
                 injectSection.append(  injectionScheduleData[i].sickID)
-  
+                
             }
         }
         injectionName.append(injectSection)
@@ -364,7 +381,7 @@ class DataManager: NSObject {
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 114
@@ -374,37 +391,9 @@ class DataManager: NSObject {
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
-        for var i = 0; i <  injectionScheduleData.count; i++
-        {
-            if   injectionScheduleData[i].subMoth == 120
-            {
-                injectSection.append(  injectionScheduleData[i].sickID)
-            }
-        }
-        injectionName.append(injectSection)
-        injectSection = [Int]()
-
-        for var i = 0; i <  injectionScheduleData.count; i++
-        {
-            if   injectionScheduleData[i].subMoth == 121
-            {
-                injectSection.append(  injectionScheduleData[i].sickID)
-            }
-        }
-        injectionName.append(injectSection)
-        injectSection = [Int]()
-
-        for var i = 0; i <  injectionScheduleData.count; i++
-        {
-            if   injectionScheduleData[i].subMoth == 127
-            {
-                injectSection.append(  injectionScheduleData[i].sickID)
-            }
-        }
-        injectionName.append(injectSection)
-        injectSection = [Int]()
-
+        
+        
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 132
@@ -414,7 +403,7 @@ class DataManager: NSObject {
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 168
@@ -424,7 +413,7 @@ class DataManager: NSObject {
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 204
@@ -436,8 +425,8 @@ class DataManager: NSObject {
         }
         injectionName.append(injectSection)
         injectSection = [Int]()
-
-
+        
+        
     }
     
     func getInjectionBook(id: Int)
@@ -445,54 +434,54 @@ class DataManager: NSObject {
         injectData = []
         var data = [SQLRow]()
         data = db.query("SELECT * FROM InjectionBook WHERE UserID="+"\(id)")
-
+        
         for var index = 0; index < data.count; index++
         {
             let row = data[index]
             let userID = row["UserID"]
-                if let sickID = row["SickID"]
-                {
-                    injectBook.sickID = sickID.asInt()
-                   
-                }
-                if let subMonth = row["InjectionDate"]
-                {
-                    injectBook.injectDate = subMonth.asDate()!
-                }
-                if let subMonth = row["InjectionNumber"]
-                {
-                    injectBook.number = subMonth.asString()
-                }
-                if let subMonth = row["IsInjection"]
-                {
-                    injectBook.isInjection = subMonth.asInt()
-                }
-                if let subMonth = row["Inactive"]
-                {
-                    injectBook.inactive = subMonth.asInt()
-                }
-                if let subMonth = row["Number"]
-                {
-                    injectBook.injectNumber = subMonth.asInt()
-                     
-                }
-                if let subMonth = row["InjectionBookID"]
-                {
-                    injectBook.id = subMonth.asInt()
-                     
-                }
-                if let subMonth = row["VaccineName"]
-                {
-                    injectBook.vaccineName = subMonth.asString()
-                     
-                }
-                if let subMonth = row["Description"]
-                {
-                    injectBook.note = subMonth.asString()
-                     
-                }
-                injectData.append(injectBook)
-                injectBook = InjectionBookInfo()
+            if let sickID = row["SickID"]
+            {
+                injectBook.sickID = sickID.asInt()
+                
+            }
+            if let subMonth = row["InjectionDate"]
+            {
+                injectBook.injectDate = subMonth.asDate()!
+            }
+            if let subMonth = row["InjectionNumber"]
+            {
+                injectBook.number = subMonth.asString()
+            }
+            if let subMonth = row["IsInjection"]
+            {
+                injectBook.isInjection = subMonth.asInt()
+            }
+            if let subMonth = row["Inactive"]
+            {
+                injectBook.inactive = subMonth.asInt()
+            }
+            if let subMonth = row["Number"]
+            {
+                injectBook.injectNumber = subMonth.asInt()
+                
+            }
+            if let subMonth = row["InjectionBookID"]
+            {
+                injectBook.id = subMonth.asInt()
+                
+            }
+            if let subMonth = row["VaccineName"]
+            {
+                injectBook.vaccineName = subMonth.asString()
+                
+            }
+            if let subMonth = row["Description"]
+            {
+                injectBook.note = subMonth.asString()
+                
+            }
+            injectData.append(injectBook)
+            injectBook = InjectionBookInfo()
         }
         
         for injectBookInfo in injectData
@@ -505,17 +494,18 @@ class DataManager: NSObject {
                 }
             }
         }
-
+        
     }
-
+    
     func sortBySectionBook(injectionData: [InjectionBookInfo])
     {
         
         
         injectionScheduleData = []
+        injectBookINSection = []
         var data = [SQLRow]()
         data = db.query("SELECT * FROM InjectionSchedule")
-    
+        
         for var index = 0; index < data.count; index++
         {
             let row = data[index]
@@ -534,27 +524,27 @@ class DataManager: NSObject {
             injectionScheduleData.append(injectionScheduleInfo)
             injectionScheduleInfo = InjectionScheduleInfo()
         }
-
+        
         injectBookName = []
         
-      for var i = 0; i <  injectionScheduleData.count; i++
+        for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 0
             {
                 for var j = 0; j <  injectionData.count; j++
                 {
-                
+                    
                     if injectionData[j].sickID == injectionScheduleData[i].sickID
                     {
                         if injectionScheduleData[i].number == injectionData[j].injectNumber
                         {
                             injectBookINSection.append(injectionData[j])
-                    
+                            
                         }
                     }
                 }
             }
-
+            
         }
         if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
         injectBookINSection = [InjectionBookInfo]()
@@ -563,15 +553,15 @@ class DataManager: NSObject {
         {
             if   injectionScheduleData[i].subMoth == 2
             {
-            for var j = 0; j <  injectionData.count; j++
+                for var j = 0; j <  injectionData.count; j++
                 {
-                
+                    
                     if injectionData[j].sickID == injectionScheduleData[i].sickID
                     {
                         if injectionScheduleData[i].number == injectionData[j].injectNumber
                         {
                             injectBookINSection.append(injectionData[j])
-                        
+                            
                         }
                     }
                 }
@@ -632,72 +622,27 @@ class DataManager: NSObject {
             {
                 for var j = 0; j <  injectionData.count; j++
                 {
-                
+                    
                     if injectionData[j].sickID == injectionScheduleData[i].sickID
                     {
                         if injectionScheduleData[i].number == injectionData[j].injectNumber
                         {
                             injectBookINSection.append(injectionData[j])
-                        
+                            
                         }
                     }
                 }
-            
+                
             }
             
         }
         if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
         injectBookINSection = [InjectionBookInfo]()
-
+        
         
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 7
-            {
-                for var j = 0; j <  injectionData.count; j++
-                {
-                
-                    if injectionData[j].sickID == injectionScheduleData[i].sickID
-                    {
-                        if injectionScheduleData[i].number == injectionData[j].injectNumber
-                        {
-                            injectBookINSection.append(injectionData[j])
-                        
-                        }
-                    }
-                }
-            
-            }
-            
-        }
-        if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
-        injectBookINSection = [InjectionBookInfo]()
-        
-        for var i = 0; i <  injectionScheduleData.count; i++
-        {
-            if   injectionScheduleData[i].subMoth == 9
-            {
-                for var j = 0; j <  injectionData.count; j++
-                {
-                
-                    if injectionData[j].sickID == injectionScheduleData[i].sickID
-                    {
-                        if injectionScheduleData[i].number == injectionData[j].injectNumber
-                        {
-                            injectBookINSection.append(injectionData[j])
-                        
-                        }
-                    }
-                }
-            
-            }
-            
-        }
-        if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
-        injectBookINSection = [InjectionBookInfo]()
-        for var i = 0; i <  injectionScheduleData.count; i++
-        {
-            if   injectionScheduleData[i].subMoth == 12
             {
                 for var j = 0; j <  injectionData.count; j++
                 {
@@ -720,21 +665,95 @@ class DataManager: NSObject {
         
         for var i = 0; i <  injectionScheduleData.count; i++
         {
-            if   injectionScheduleData[i].subMoth == 15
+            if   injectionScheduleData[i].subMoth == 9
             {
                 for var j = 0; j <  injectionData.count; j++
                 {
-                
+                    
                     if injectionData[j].sickID == injectionScheduleData[i].sickID
                     {
                         if injectionScheduleData[i].number == injectionData[j].injectNumber
                         {
                             injectBookINSection.append(injectionData[j])
-                        
+                            
                         }
                     }
                 }
+                
+            }
             
+        }
+        if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
+        injectBookINSection = [InjectionBookInfo]()
+        for var i = 0; i <  injectionScheduleData.count; i++
+        {
+            if   injectionScheduleData[i].subMoth == 12
+            {
+                for var j = 0; j <  injectionData.count; j++
+                {
+                    if injectionData[j].sickID == injectionScheduleData[i].sickID
+                    {
+                        if injectionScheduleData[i].number == injectionData[j].injectNumber
+                        {
+                            if  injectionData[j].injectNumber == 1
+                            {
+                                
+                                injectBookINSection.append(injectionData[j])
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
+        injectBookINSection = [InjectionBookInfo]()
+        
+        
+        for var i = 0; i <  injectionScheduleData.count; i++
+        {
+            if   injectionScheduleData[i].subMoth == 12
+            {
+                for var j = 0; j <  injectionData.count; j++
+                {
+                    if injectionData[j].sickID == 9 && injectionData[j].injectNumber == 2
+                    {
+                        if injectionData[j].sickID == injectionScheduleData[i].sickID
+                        {
+                            if injectionScheduleData[i].number == injectionData[j].injectNumber
+                            {
+                                
+                                injectBookINSection.append(injectionData[j])
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
+        injectBookINSection = [InjectionBookInfo]()
+        
+        
+        for var i = 0; i <  injectionScheduleData.count; i++
+        {
+            if   injectionScheduleData[i].subMoth == 15
+            {
+                for var j = 0; j <  injectionData.count; j++
+                {
+                    
+                    if injectionData[j].sickID == injectionScheduleData[i].sickID
+                    {
+                        if injectionScheduleData[i].number == injectionData[j].injectNumber
+                        {
+                            injectBookINSection.append(injectionData[j])
+                            
+                        }
+                    }
+                }
+                
             }
             
         }
@@ -814,26 +833,56 @@ class DataManager: NSObject {
             if   injectionScheduleData[i].subMoth == 24
             {
                 
-                    for var j = 0; j <  injectionData.count; j++
-                    {
+                for var j = 0; j <  injectionData.count; j++
+                {
                     
-                        if injectionData[j].sickID == injectionScheduleData[i].sickID
+                    if injectionData[j].sickID == injectionScheduleData[i].sickID
+                    {
+                        if injectionScheduleData[i].number == injectionData[j].injectNumber
                         {
-                            if injectionScheduleData[i].number == injectionData[j].injectNumber
+                            if  injectionData[j].injectNumber == 1
                             {
                                 injectBookINSection.append(injectionData[j])
-                            
                             }
                         }
                     }
-            
+                }
+                
                 
             }
             
         }
         if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
         injectBookINSection = [InjectionBookInfo]()
-
+        
+        for var i = 0; i <  injectionScheduleData.count; i++
+        {
+            if   injectionScheduleData[i].subMoth == 24
+            {
+                
+                for var j = 0; j <  injectionData.count; j++
+                {
+                    
+                    if injectionData[j].sickID == injectionScheduleData[i].sickID
+                    {
+                        if injectionScheduleData[i].number == injectionData[j].injectNumber
+                        {
+                            if  injectionData[j].injectNumber == 3
+                            {
+                                injectBookINSection.append(injectionData[j])
+                            }
+                        }
+                    }
+                }
+                
+                
+            }
+            
+        }
+        if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
+        injectBookINSection = [InjectionBookInfo]()
+        
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 31
@@ -878,7 +927,7 @@ class DataManager: NSObject {
         }
         if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
         injectBookINSection = [InjectionBookInfo]()
-            
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 60
@@ -890,8 +939,10 @@ class DataManager: NSObject {
                     {
                         if injectionScheduleData[i].number == injectionData[j].injectNumber
                         {
-                            injectBookINSection.append(injectionData[j])
-                            
+                            if injectionData[j].injectNumber == 2
+                            {
+                                injectBookINSection.append(injectionData[j])
+                            }
                         }
                     }
                 }
@@ -901,7 +952,32 @@ class DataManager: NSObject {
         }
         if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
         injectBookINSection = [InjectionBookInfo]()
+        
+        for var i = 0; i <  injectionScheduleData.count; i++
+        {
+            if   injectionScheduleData[i].subMoth == 60
+            {
+                for var j = 0; j <  injectionData.count; j++
+                {
+                    
+                    if injectionData[j].sickID == injectionScheduleData[i].sickID
+                    {
+                        if injectionScheduleData[i].number == injectionData[j].injectNumber
+                        {
+                            if injectionData[j].injectNumber == 4
+                            {
+                                injectBookINSection.append(injectionData[j])
+                            }
+                        }
+                    }
+                }
+                
+            }
             
+        }
+        if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
+        injectBookINSection = [InjectionBookInfo]()
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 63            {
@@ -934,8 +1010,10 @@ class DataManager: NSObject {
                     {
                         if injectionScheduleData[i].number == injectionData[j].injectNumber
                         {
-                            injectBookINSection.append(injectionData[j])
-                            
+                            if injectionData[j].injectNumber == 3
+                            {
+                                injectBookINSection.append(injectionData[j])
+                            }
                         }
                     }
                 }
@@ -945,7 +1023,33 @@ class DataManager: NSObject {
         }
         if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
         injectBookINSection = [InjectionBookInfo]()
+        
+        for var i = 0; i <  injectionScheduleData.count; i++
+        {
+            if   injectionScheduleData[i].subMoth == 96
+            {
+                for var j = 0; j <  injectionData.count; j++
+                {
+                    
+                    if injectionData[j].sickID == injectionScheduleData[i].sickID
+                    {
+                        if injectionScheduleData[i].number == injectionData[j].injectNumber
+                        {
+                            if injectionData[j].injectNumber == 5
+                            {
+                                injectBookINSection.append(injectionData[j])
+                            }
+                        }
+                    }
+                }
+                
+            }
             
+        }
+        if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
+        injectBookINSection = [InjectionBookInfo]()
+        
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 108
@@ -967,7 +1071,7 @@ class DataManager: NSObject {
         }
         if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
         injectBookINSection = [InjectionBookInfo]()
-            
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 110
@@ -990,7 +1094,7 @@ class DataManager: NSObject {
         }
         if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
         injectBookINSection = [InjectionBookInfo]()
-            
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 111
@@ -1012,7 +1116,7 @@ class DataManager: NSObject {
         }
         if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
         injectBookINSection = [InjectionBookInfo]()
-
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 112
@@ -1133,16 +1237,48 @@ class DataManager: NSObject {
                     {
                         if injectionScheduleData[i].number == injectionData[j].injectNumber
                         {
-                            injectBookINSection.append(injectionData[j])
-                            
+                            if injectionData[j].injectNumber == 4
+                            {
+                                injectBookINSection.append(injectionData[j])
+                            }
                         }
                     }
                 }
+                
             }
             
         }
         if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
         injectBookINSection = [InjectionBookInfo]()
+        
+        for var i = 0; i <  injectionScheduleData.count; i++
+        {
+            if   injectionScheduleData[i].subMoth == 132
+            {
+                for var j = 0; j <  injectionData.count; j++
+                {
+                    
+                    if injectionData[j].sickID == injectionScheduleData[i].sickID
+                    {
+                        if injectionScheduleData[i].number == injectionData[j].injectNumber
+                        {
+                            if injectionData[j].injectNumber == 6
+                            {
+                                injectBookINSection.append(injectionData[j])
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
+        injectBookINSection = [InjectionBookInfo]()
+        
+        
+        
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 168
@@ -1154,8 +1290,10 @@ class DataManager: NSObject {
                     {
                         if injectionScheduleData[i].number == injectionData[j].injectNumber
                         {
-                            injectBookINSection.append(injectionData[j])
-                            
+                            if injectionData[j].injectNumber == 5
+                            {
+                                injectBookINSection.append(injectionData[j])
+                            }
                         }
                     }
                 }
@@ -1165,6 +1303,32 @@ class DataManager: NSObject {
         }
         if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
         injectBookINSection = [InjectionBookInfo]()
+        
+        for var i = 0; i <  injectionScheduleData.count; i++
+        {
+            if   injectionScheduleData[i].subMoth == 168
+            {
+                for var j = 0; j <  injectionData.count; j++
+                {
+                    
+                    if injectionData[j].sickID == injectionScheduleData[i].sickID
+                    {
+                        if injectionScheduleData[i].number == injectionData[j].injectNumber
+                        {
+                            if injectionData[j].injectNumber == 7
+                            {
+                                injectBookINSection.append(injectionData[j])
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
+        injectBookINSection = [InjectionBookInfo]()
+        
         for var i = 0; i <  injectionScheduleData.count; i++
         {
             if   injectionScheduleData[i].subMoth == 204
@@ -1187,7 +1351,6 @@ class DataManager: NSObject {
         }
         if injectBookINSection.count > 0 { injectBookName.append(injectBookINSection)}
         injectBookINSection = [InjectionBookInfo]()
-
     }
     
     func getSickRegisterInfo(id: Int)
@@ -1226,7 +1389,7 @@ class DataManager: NSObject {
             sickRegisterData.append(sickRegisterInfo)
             sickRegisterInfo = SickRegisterInfo()
         }
-
+        
     }
     func getReportAllInSection(sickID: [Int], id: Int)
     {
@@ -1246,7 +1409,29 @@ class DataManager: NSObject {
             injectBookName.append(injectBookINSection)
             injectBookINSection = []
         }
-
+        
     }
-
+    func resetData()
+    {
+        
+        userData = []
+        
+        
+        sickData = []
+        
+        
+        injectionScheduleData = []
+        
+        
+        injectionName = []
+        
+        injectData = []
+        
+        injectBookSection = []
+        injectBookINSection = []
+        
+        
+        sickRegisterData = []
+        
+    }
 }

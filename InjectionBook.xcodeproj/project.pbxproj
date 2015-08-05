@@ -27,7 +27,7 @@
 		CC202C271B08327100ADF516 /* InjectionBookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C261B08327100ADF516 /* InjectionBookTests.swift */; };
 		CC202C331B08330000ADF516 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C311B08330000ADF516 /* AppDelegate.swift */; };
 		CC202C361B08331100ADF516 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC202C351B08331100ADF516 /* Info.plist */; };
-		CC202C3F1B08479700ADF516 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C3E1B08479700ADF516 /* AddUserViewController.swift */; };
+		CC202C3F1B08479700ADF516 /* AddUserViewController .swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C3E1B08479700ADF516 /* AddUserViewController .swift */; };
 		CC202C461B08491500ADF516 /* SoTiemChung.db in Resources */ = {isa = PBXBuildFile; fileRef = CC202C451B08491500ADF516 /* SoTiemChung.db */; };
 		CC202C551B084D2B00ADF516 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC202C541B084D2B00ADF516 /* libsqlite3.0.dylib */; };
 		CC202C581B08584A00ADF516 /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C561B08584A00ADF516 /* SQLiteDB.swift */; };
@@ -35,16 +35,20 @@
 		CC202C5B1B0859BD00ADF516 /* ListUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C5A1B0859BD00ADF516 /* ListUserTableViewCell.swift */; };
 		CC202C5F1B0859EC00ADF516 /* ListUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C5E1B0859EC00ADF516 /* ListUserTableViewController.swift */; };
 		CC202C611B085C0A00ADF516 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C601B085C0A00ADF516 /* DataManager.swift */; };
-		CC202C671B085FE000ADF516 /* PopDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C641B085FE000ADF516 /* PopDateViewController.swift */; };
-		CC202C681B085FE000ADF516 /* PopDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC202C651B085FE000ADF516 /* PopDateViewController.xib */; };
-		CC202C6A1B08615200ADF516 /* PopDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C691B08615200ADF516 /* PopDatePicker.swift */; };
 		CC202C6C1B08621F00ADF516 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C6B1B08621F00ADF516 /* DateUtils.swift */; };
 		CC202C6E1B088DA600ADF516 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C6D1B088DA600ADF516 /* UserInfo.swift */; };
 		CC202C701B088E6300ADF516 /* InjectionBookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC202C6F1B088E6300ADF516 /* InjectionBookInfo.swift */; };
 		CC47DFC21B0B2FF80066A3B6 /* InjectionBookAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC47DFC11B0B2FF80066A3B6 /* InjectionBookAllViewController.swift */; };
+		CCA1CD181B1712D100E32865 /* FVCustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1CD171B1712D100E32865 /* FVCustomAlertView.swift */; };
 		CCA824111B130ADF00699589 /* MediumMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8240F1B130ADF00699589 /* MediumMenu.swift */; };
 		CCA824121B130ADF00699589 /* MediumMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA824101B130ADF00699589 /* MediumMenuItem.swift */; };
+		CCA86BCE1B16AB3A0085C321 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA86BCD1B16AB3A0085C321 /* LocalNotification.swift */; };
 		CCB0B8201B1354A400307374 /* ChooseUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB0B81F1B1354A400307374 /* ChooseUserTableViewController.swift */; };
+		CCB38B481B37FF9800F38035 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCB38B471B37FF9800F38035 /* Images-2.xcassets */; };
+		CCB62CF51B4A6A60002AB751 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB62CF41B4A6A60002AB751 /* DatePickerDialog.swift */; };
+		CCB62CF91B4A7197002AB751 /* PopDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB62CF61B4A7197002AB751 /* PopDatePicker.swift */; };
+		CCB62CFA1B4A7197002AB751 /* PopDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB62CF71B4A7197002AB751 /* PopDateViewController.swift */; };
+		CCB62CFB1B4A7197002AB751 /* PopDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCB62CF81B4A7197002AB751 /* PopDateViewController.xib */; };
 		CCC3A8A31B136E7E0000DCA5 /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A8A21B136E7E0000DCA5 /* AKPickerView.swift */; };
 		CCC3A8A51B137DBD0000DCA5 /* ChooseUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A8A41B137DBD0000DCA5 /* ChooseUserTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -74,7 +78,7 @@
 		CC1437F51B0D771F00F43DCE /* ChooseVaccineViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseVaccineViewCell.swift; path = InjectionBook/Sources/ChooseVaccineViewCell.swift; sourceTree = "<group>"; };
 		CC174B1F1B08944A0096B73F /* InjectionScheduleInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InjectionScheduleInfo.swift; path = InjectionBook/Sources/InjectionScheduleInfo.swift; sourceTree = "<group>"; };
 		CC174B211B08974F0096B73F /* InjectionScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InjectionScheduleTableViewController.swift; path = InjectionBook/Sources/InjectionScheduleTableViewController.swift; sourceTree = "<group>"; };
-		CC202C0B1B08327100ADF516 /* InjectionBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InjectionBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC202C0B1B08327100ADF516 /* Sổ tiêm chủng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sổ tiêm chủng.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC202C151B08327100ADF516 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CC202C171B08327100ADF516 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CC202C1A1B08327100ADF516 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -83,7 +87,7 @@
 		CC202C261B08327100ADF516 /* InjectionBookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionBookTests.swift; sourceTree = "<group>"; };
 		CC202C311B08330000ADF516 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = InjectionBook/Sources/AppDelegate.swift; sourceTree = "<group>"; };
 		CC202C351B08331100ADF516 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
-		CC202C3E1B08479700ADF516 /* AddUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddUserViewController.swift; path = InjectionBook/Sources/AddUserViewController.swift; sourceTree = "<group>"; };
+		CC202C3E1B08479700ADF516 /* AddUserViewController .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "AddUserViewController .swift"; path = "InjectionBook/Sources/AddUserViewController .swift"; sourceTree = "<group>"; };
 		CC202C451B08491500ADF516 /* SoTiemChung.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = SoTiemChung.db; path = Resources/SoTiemChung.db; sourceTree = "<group>"; };
 		CC202C511B084B6400ADF516 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "InjectionBook/Sources/Bridging-Header.h"; sourceTree = "<group>"; };
 		CC202C541B084D2B00ADF516 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -92,16 +96,20 @@
 		CC202C5A1B0859BD00ADF516 /* ListUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListUserTableViewCell.swift; path = InjectionBook/Sources/ListUserTableViewCell.swift; sourceTree = "<group>"; };
 		CC202C5E1B0859EC00ADF516 /* ListUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListUserTableViewController.swift; path = InjectionBook/Sources/ListUserTableViewController.swift; sourceTree = "<group>"; };
 		CC202C601B085C0A00ADF516 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = InjectionBook/Sources/DataManager.swift; sourceTree = "<group>"; };
-		CC202C641B085FE000ADF516 /* PopDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopDateViewController.swift; path = InjectionBook/PopupDatePicker/PopDateViewController.swift; sourceTree = "<group>"; };
-		CC202C651B085FE000ADF516 /* PopDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopDateViewController.xib; path = InjectionBook/PopupDatePicker/PopDateViewController.xib; sourceTree = "<group>"; };
-		CC202C691B08615200ADF516 /* PopDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopDatePicker.swift; path = InjectionBook/PopupDatePicker/PopDatePicker.swift; sourceTree = "<group>"; };
 		CC202C6B1B08621F00ADF516 /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateUtils.swift; path = InjectionBook/Sources/DateUtils.swift; sourceTree = "<group>"; };
 		CC202C6D1B088DA600ADF516 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfo.swift; path = InjectionBook/Sources/UserInfo.swift; sourceTree = "<group>"; };
 		CC202C6F1B088E6300ADF516 /* InjectionBookInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InjectionBookInfo.swift; path = InjectionBook/Sources/InjectionBookInfo.swift; sourceTree = "<group>"; };
 		CC47DFC11B0B2FF80066A3B6 /* InjectionBookAllViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InjectionBookAllViewController.swift; path = InjectionBook/Sources/InjectionBookAllViewController.swift; sourceTree = "<group>"; };
+		CCA1CD171B1712D100E32865 /* FVCustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FVCustomAlertView.swift; path = InjectionBook/Sources/FVCustomAlertView.swift; sourceTree = "<group>"; };
 		CCA8240F1B130ADF00699589 /* MediumMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediumMenu.swift; path = InjectionBook/MediumMenu/MediumMenu.swift; sourceTree = "<group>"; };
 		CCA824101B130ADF00699589 /* MediumMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediumMenuItem.swift; path = InjectionBook/MediumMenu/MediumMenuItem.swift; sourceTree = "<group>"; };
+		CCA86BCD1B16AB3A0085C321 /* LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalNotification.swift; path = InjectionBook/Sources/LocalNotification.swift; sourceTree = "<group>"; };
 		CCB0B81F1B1354A400307374 /* ChooseUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseUserTableViewController.swift; path = InjectionBook/Sources/ChooseUserTableViewController.swift; sourceTree = "<group>"; };
+		CCB38B471B37FF9800F38035 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
+		CCB62CF41B4A6A60002AB751 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerDialog.swift; path = InjectionBook/PopupDatePicker/DatePickerDialog.swift; sourceTree = "<group>"; };
+		CCB62CF61B4A7197002AB751 /* PopDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopDatePicker.swift; path = InjectionBook/PopupDatePicker/PopDatePicker.swift; sourceTree = "<group>"; };
+		CCB62CF71B4A7197002AB751 /* PopDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopDateViewController.swift; path = InjectionBook/PopupDatePicker/PopDateViewController.swift; sourceTree = "<group>"; };
+		CCB62CF81B4A7197002AB751 /* PopDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopDateViewController.xib; path = InjectionBook/PopupDatePicker/PopDateViewController.xib; sourceTree = "<group>"; };
 		CCC3A8A11B136E7E0000DCA5 /* AKPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKPickerView.h; path = InjectionBook/AKPickerView/AKPickerView.h; sourceTree = "<group>"; };
 		CCC3A8A21B136E7E0000DCA5 /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AKPickerView.swift; path = InjectionBook/AKPickerView/AKPickerView.swift; sourceTree = "<group>"; };
 		CCC3A8A41B137DBD0000DCA5 /* ChooseUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseUserTableViewCell.swift; path = InjectionBook/Sources/ChooseUserTableViewCell.swift; sourceTree = "<group>"; };
@@ -144,7 +152,7 @@
 		CC202C0C1B08327100ADF516 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CC202C0B1B08327100ADF516 /* InjectionBook.app */,
+				CC202C0B1B08327100ADF516 /* Sổ tiêm chủng.app */,
 				CC202C201B08327100ADF516 /* InjectionBookTests.xctest */,
 			);
 			name = Products;
@@ -153,6 +161,7 @@
 		CC202C0D1B08327100ADF516 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CCB38B471B37FF9800F38035 /* Images-2.xcassets */,
 				CC202C451B08491500ADF516 /* SoTiemChung.db */,
 				CC202C351B08331100ADF516 /* Info.plist */,
 				CC202C141B08327100ADF516 /* Main.storyboard */,
@@ -183,12 +192,13 @@
 		CC202C301B0832E400ADF516 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CCA1CD171B1712D100E32865 /* FVCustomAlertView.swift */,
 				CC1212CE1B0ECD44009A8F0A /* InjectionBookTableViewCell.swift */,
 				CC0EFF441B0DE8F600B73A80 /* ChooseVaccineController.swift */,
 				CC0EFF451B0DE8F600B73A80 /* CustomUIButton.swift */,
 				CC0EFF471B0DE8F600B73A80 /* SickInfo.swift */,
 				CC0EFF481B0DE8F600B73A80 /* SweetAlert.swift */,
-				CC202C3E1B08479700ADF516 /* AddUserViewController.swift */,
+				CC202C3E1B08479700ADF516 /* AddUserViewController .swift */,
 				CC202C311B08330000ADF516 /* AppDelegate.swift */,
 				CC202C511B084B6400ADF516 /* Bridging-Header.h */,
 				CC1437F51B0D771F00F43DCE /* ChooseVaccineViewCell.swift */,
@@ -209,6 +219,7 @@
 				CC1170B21B0F763E00492545 /* TabBarViewController.swift */,
 				CCB0B81F1B1354A400307374 /* ChooseUserTableViewController.swift */,
 				CCC3A8A41B137DBD0000DCA5 /* ChooseUserTableViewCell.swift */,
+				CCA86BCD1B16AB3A0085C321 /* LocalNotification.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -241,9 +252,10 @@
 		CC202C621B085FC900ADF516 /* PopupDatePicker */ = {
 			isa = PBXGroup;
 			children = (
-				CC202C691B08615200ADF516 /* PopDatePicker.swift */,
-				CC202C641B085FE000ADF516 /* PopDateViewController.swift */,
-				CC202C651B085FE000ADF516 /* PopDateViewController.xib */,
+				CCB62CF61B4A7197002AB751 /* PopDatePicker.swift */,
+				CCB62CF71B4A7197002AB751 /* PopDateViewController.swift */,
+				CCB62CF81B4A7197002AB751 /* PopDateViewController.xib */,
+				CCB62CF41B4A6A60002AB751 /* DatePickerDialog.swift */,
 			);
 			name = PopupDatePicker;
 			sourceTree = "<group>";
@@ -283,7 +295,7 @@
 			);
 			name = InjectionBook;
 			productName = InjectionBook;
-			productReference = CC202C0B1B08327100ADF516 /* InjectionBook.app */;
+			productReference = CC202C0B1B08327100ADF516 /* Sổ tiêm chủng.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CC202C1F1B08327100ADF516 /* InjectionBookTests */ = {
@@ -315,6 +327,7 @@
 				TargetAttributes = {
 					CC202C0A1B08327100ADF516 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = NZ5LJ97QQZ;
 					};
 					CC202C1F1B08327100ADF516 = {
 						CreatedOnToolsVersion = 6.3;
@@ -348,7 +361,8 @@
 			files = (
 				CC202C361B08331100ADF516 /* Info.plist in Resources */,
 				CC202C461B08491500ADF516 /* SoTiemChung.db in Resources */,
-				CC202C681B085FE000ADF516 /* PopDateViewController.xib in Resources */,
+				CCB38B481B37FF9800F38035 /* Images-2.xcassets in Resources */,
+				CCB62CFB1B4A7197002AB751 /* PopDateViewController.xib in Resources */,
 				CC202C161B08327100ADF516 /* Main.storyboard in Resources */,
 				CC202C1B1B08327100ADF516 /* LaunchScreen.xib in Resources */,
 				CC202C181B08327100ADF516 /* Images.xcassets in Resources */,
@@ -375,20 +389,23 @@
 				CC202C6C1B08621F00ADF516 /* DateUtils.swift in Sources */,
 				CCC3A8A31B136E7E0000DCA5 /* AKPickerView.swift in Sources */,
 				CC1437F61B0D771F00F43DCE /* ChooseVaccineViewCell.swift in Sources */,
+				CCB62CFA1B4A7197002AB751 /* PopDateViewController.swift in Sources */,
 				CC1170B31B0F763E00492545 /* TabBarViewController.swift in Sources */,
 				CC47DFC21B0B2FF80066A3B6 /* InjectionBookAllViewController.swift in Sources */,
 				CC0F40AD1B0C27D000FB0B39 /* ReportTableViewController.swift in Sources */,
+				CCB62CF91B4A7197002AB751 /* PopDatePicker.swift in Sources */,
 				CC202C5B1B0859BD00ADF516 /* ListUserTableViewCell.swift in Sources */,
-				CC202C671B085FE000ADF516 /* PopDateViewController.swift in Sources */,
 				CC0EFF4D1B0DE8F600B73A80 /* SweetAlert.swift in Sources */,
 				CC202C5F1B0859EC00ADF516 /* ListUserTableViewController.swift in Sources */,
 				CC0F7FBF1B0C84CD00211DB1 /* SickRegisterInfo.swift in Sources */,
 				CC202C591B08584A00ADF516 /* String-Extras.swift in Sources */,
 				CC0F40B11B0C282200FB0B39 /* ReportTableViewCell.swift in Sources */,
-				CC202C3F1B08479700ADF516 /* AddUserViewController.swift in Sources */,
+				CC202C3F1B08479700ADF516 /* AddUserViewController .swift in Sources */,
 				CC202C581B08584A00ADF516 /* SQLiteDB.swift in Sources */,
 				CC202C6E1B088DA600ADF516 /* UserInfo.swift in Sources */,
+				CCB62CF51B4A6A60002AB751 /* DatePickerDialog.swift in Sources */,
 				CCA824111B130ADF00699589 /* MediumMenu.swift in Sources */,
+				CCA86BCE1B16AB3A0085C321 /* LocalNotification.swift in Sources */,
 				CC1212CF1B0ECD44009A8F0A /* InjectionBookTableViewCell.swift in Sources */,
 				CC202C701B088E6300ADF516 /* InjectionBookInfo.swift in Sources */,
 				CC174B221B08974F0096B73F /* InjectionScheduleTableViewController.swift in Sources */,
@@ -396,10 +413,10 @@
 				CCB0B8201B1354A400307374 /* ChooseUserTableViewController.swift in Sources */,
 				CC0FC0781B0B47F20045E2EC /* EditInjectViewController.swift in Sources */,
 				CC0EFF491B0DE8F600B73A80 /* ChooseVaccineController.swift in Sources */,
+				CCA1CD181B1712D100E32865 /* FVCustomAlertView.swift in Sources */,
 				CCC3A8A51B137DBD0000DCA5 /* ChooseUserTableViewCell.swift in Sources */,
 				CC202C611B085C0A00ADF516 /* DataManager.swift in Sources */,
 				CC0E78871B0AF22000EC6BA6 /* EditUserViewController.swift in Sources */,
-				CC202C6A1B08615200ADF516 /* PopDatePicker.swift in Sources */,
 				CC202C331B08330000ADF516 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,10 +546,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Diamond Technology Solution Joint Stock Company (NZ5LJ97QQZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Diamond Technology Solution Joint Stock Company (NZ5LJ97QQZ)";
 				INFOPLIST_FILE = "$(SRCROOT)/InjectionBook/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Sổ tiêm chủng";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "InjectionBook/Sources/Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -540,10 +563,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Diamond Technology Solution Joint Stock Company (NZ5LJ97QQZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Diamond Technology Solution Joint Stock Company (NZ5LJ97QQZ)";
 				INFOPLIST_FILE = "$(SRCROOT)/InjectionBook/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Sổ tiêm chủng";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "InjectionBook/Sources/Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

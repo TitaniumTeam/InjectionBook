@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class InjectionBookAllViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, UIPopoverControllerDelegate {
 
     
@@ -24,8 +22,8 @@ class InjectionBookAllViewController: UIViewController,UITableViewDelegate, UITa
     var section: [NSDate] = []
     var inJectInSection: [InjectionBookInfo] = []
     var sectionName = [String]()
-    var indexSegment = Int()
-    
+    var indexSegment = 0
+    var index = 0
 
     
     @IBOutlet weak var segment: UISegmentedControl!
@@ -42,80 +40,129 @@ class InjectionBookAllViewController: UIViewController,UITableViewDelegate, UITa
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        segment.selectedSegmentIndex = 0
-        self.tableView.scrollsToTop = true
+        self.navigationController?.navigationBar.barTintColor = UIColor(red:138/255, green:189/255, blue:68/255, alpha:1)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         dataManager.getUserInfo()
+        self.segment.selectedSegmentIndex = 0
         if dataManager.userData.count > 0
         {
-            
-            if userID < 1
+            if userID == 0 || dataManager.getUserExist(userID) == 0
             {
                 dataManager.getUserInfo()
                 userID = dataManager.userData[0].userID
-            }
-            dataManager.getInjectionBook(userID);
-            dataManager.getSickInfo()
-            dataInjectBookFuture = [InjectionBookInfo]()
-            dataInjectBook = [InjectionBookInfo]()
-            let today = NSDate()
-            
-            for var i = 0; i <  dataManager.injectData.count; i++
-            {
-                if dataManager.injectData[i].injectDate.isGreaterThanDate(today)
+                index = 0
+                
+                dataManager.getInjectionBook(userID);
+                dataManager.getSickInfo()
+                dataInjectBookFuture = [InjectionBookInfo]()
+                dataInjectBook = [InjectionBookInfo]()
+                let today = NSDate()
+                
+                for var i = 0; i <  dataManager.injectData.count; i++
                 {
-                    if dataManager.injectData[i].inactive == 0
+                    if dataManager.injectData[i].injectDate.isGreaterThanDate(today)
                     {
-                        dataInjectBookFuture.append(dataManager.injectData[i])
-                        
+                        if dataManager.injectData[i].inactive == 0
+                        {
+                            dataInjectBookFuture.append(dataManager.injectData[i])
+                            
+                        }
+                    }
+                   
+                }
+                dataInjectBook = dataInjectBookFuture
+                
+                dataManager.sortBySectionBook(dataInjectBook)
+                sectionName = []
+                for injectInfo in dataManager.injectBookName
+                {
+                    
+                    var sectionDate = injectInfo[0].injectDate
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "MM/yyyy"
+                    var sectionStr = "Tháng " + dateFormatter.stringFromDate(sectionDate)
+                    sectionName.append(sectionStr)
+                    
+                }
+                dataManager.getUserInfo()
+                naviItem.title = "Sổ tiêm "+(dataManager.userData[index].userName as String)
+            }
+            
+            else if userID > 0
+            {
+                dataManager.getInjectionBook(userID);
+                dataManager.getSickInfo()
+                dataInjectBookFuture = [InjectionBookInfo]()
+                dataInjectBook = [InjectionBookInfo]()
+                let today = NSDate()
+                
+                for var i = 0; i <  dataManager.injectData.count; i++
+                {
+                    if dataManager.injectData[i].injectDate.isGreaterThanDate(today)
+                    {
+                        if dataManager.injectData[i].inactive == 0
+                        {
+                            dataInjectBookFuture.append(dataManager.injectData[i])
+                            
+                        }
                     }
                 }
+                dataInjectBook = dataInjectBookFuture
+                
+                dataManager.sortBySectionBook(dataInjectBook)
+                sectionName = []
+                for injectInfo in dataManager.injectBookName
+                {
+                    var sectionDate = injectInfo[0].injectDate
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "MM/yyyy"
+                    var sectionStr = "Tháng " + dateFormatter.stringFromDate(sectionDate)
+                    sectionName.append(sectionStr)
+                    
+                }
+                dataManager.getUserInfo()
+                naviItem.title = "Sổ tiêm "+(dataManager.userData[index].userName as String)
             }
-            dataInjectBook = dataInjectBookFuture
             
-            dataManager.sortBySectionBook(dataInjectBook)
-            sectionName = []
-            for injectInfo in dataManager.injectBookName
+            naviItem.hidesBackButton = true
+            tableView.delegate = self
+            tableView.dataSource = self
+            indexSegment = 0
+            tableView.reloadData()
+            tableView.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: true)
+        
+            let buttonBack: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+            buttonBack.frame = CGRectMake(0, 0, 40, 40)
+            buttonBack.setImage(UIImage(named:"avatar_icon_boy"), forState: UIControlState.Normal)
+        
+            if  dataManager.dictUserGender[userID] == 0
             {
-                
-                var sectionDate = injectInfo[0].injectDate
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "MM/yyyy"
-                var sectionStr = "Tháng " + dateFormatter.stringFromDate(sectionDate)
-                sectionName.append(sectionStr)
-                
+                buttonBack.setImage(UIImage(named:"avatar_icon_girl"), forState: UIControlState.Normal)
             }
+        
+            buttonBack.addTarget(self, action: "leftNavButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+            buttonBack.backgroundColor = UIColor.whiteColor()
+            buttonBack.layer.cornerRadius = buttonBack.frame.height/2
+            var leftBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: buttonBack)
+        
+            
+           
+            
+            self.navigationItem.setLeftBarButtonItem(leftBarButtonItem, animated: false)
         }
         else
         {
+            
+            let alert = UIAlertView(title:"Sổ tiêm chủng", message:"Bạn cần thêm bé trước", delegate:nil, cancelButtonTitle: "OK")
+            alert.show()
+            var navController: UINavigationController = self.tabBarController?.viewControllers?[0] as! UINavigationController
+            self.tabBarController!.selectedViewController = navController
+            self.navigationController?.popViewControllerAnimated(true)
             self.dismissViewControllerAnimated(true, completion: nil)
+            tableView.reloadData()
+            dataManager.resetData()
+            naviItem.title = "Không có dữ liệu"
         }
-        if self.isMovingFromParentViewController()
-        {
-            self.navigationController?.performSegueWithIdentifier("ReturnInjectBook", sender: nil)
-        }
-        naviItem.title = "Sổ tiêm "+dataManager.dictUserInfo[userID]!
-        naviItem.hidesBackButton = true
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.reloadData()
-        tableView.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: true)
-        
-        let buttonBack: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-        buttonBack.frame = CGRectMake(0, 0, 40, 40)
-        buttonBack.setImage(UIImage(named:"avatar_icon_boy"), forState: UIControlState.Normal)
-        
-        if  dataManager.dictUserGender[userID] == 0
-        {
-            buttonBack.setImage(UIImage(named:"avatar_icon_girl"), forState: UIControlState.Normal)
-        }
-        
-        buttonBack.addTarget(self, action: "leftNavButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        buttonBack.backgroundColor = UIColor.whiteColor()
-        buttonBack.layer.cornerRadius = buttonBack.frame.height/2
-        var leftBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: buttonBack)
-        
-        self.navigationItem.setLeftBarButtonItem(leftBarButtonItem, animated: false)
-        
         
     }
     
@@ -127,9 +174,9 @@ class InjectionBookAllViewController: UIViewController,UITableViewDelegate, UITa
         viewController.modalPresentationStyle = UIModalPresentationStyle.Popover
         viewController.popoverPresentationController?.delegate = self
         viewController.popoverPresentationController?.sourceView = sender
-        viewController.popoverPresentationController?.permittedArrowDirections = .Any
-        viewController.preferredContentSize = CGSizeMake(275.0, 375.0)
-        
+        viewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.Any
+        viewController.preferredContentSize = CGSizeMake(275, 180)
+
         // Present the popoverViewController's view on screen
         self.presentViewController(viewController, animated: true, completion: nil)
 
@@ -159,19 +206,19 @@ class InjectionBookAllViewController: UIViewController,UITableViewDelegate, UITa
                         dataInjectBookFuture.append(dataManager.injectData[i])
                     }
                 }
+                 println("ngay thang \(dataManager.injectData[i].injectDate)")
+                 println("ngay thang \(dataManager.injectData[i].id)")
             }
             dataInjectBook = dataInjectBookFuture
             dataManager.sortBySectionBook(dataInjectBook)
             sectionName = []
             for injectInfo in dataManager.injectBookName
             {
-                
                 var sectionDate = injectInfo[0].injectDate
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "MM/yyyy"
                 var sectionStr = "Tháng " + dateFormatter.stringFromDate(sectionDate)
                 sectionName.append(sectionStr)
-                
             }
             
             tableView.reloadData()
@@ -255,24 +302,20 @@ class InjectionBookAllViewController: UIViewController,UITableViewDelegate, UITa
     }
     
      func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 5
+        return 0
     }
     
   func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
     if indexSegment == 0 || indexSegment == 1
         {
             let header: UITableViewHeaderFooterView = (view as? UITableViewHeaderFooterView)!
-            header.contentView.backgroundColor = UIColor.grayColor()
-            header.textLabel.textColor = UIColor.greenColor()
-        }
+            header.contentView.backgroundColor = UIColor(red:224/255, green:224/255, blue:224/255, alpha:1)
+            header.textLabel.textColor = UIColor(red:130/255, green:176/255, blue:70/255, alpha:1)        }
      else
         {
             let header: UITableViewHeaderFooterView = (view as? UITableViewHeaderFooterView)!
-            header.contentView.backgroundColor = UIColor.grayColor()
-            header.textLabel.textColor = UIColor.greenColor()
-            //let headerTapped = UITapGestureRecognizer (target: self, action:"sectionHeaderTapped:")
-           // header .addGestureRecognizer(headerTapped)
-                
+            header.contentView.backgroundColor = UIColor(red:224/255, green:224/255, blue:224/255, alpha:1)
+            header.textLabel.textColor = UIColor(red:130/255, green:176/255, blue:70/255, alpha:1)
         }
     }
     
@@ -295,7 +338,7 @@ class InjectionBookAllViewController: UIViewController,UITableViewDelegate, UITa
         let cell = tableView.dequeueReusableCellWithIdentifier("InjectionBookCell", forIndexPath: indexPath) as! InjectionBookTableViewCell
         
         tableView.sectionIndexColor = UIColor.greenColor()
-        
+        cell.isInjectImg.hidden = true
         if indexSegment == 2
         {
             
@@ -452,6 +495,9 @@ class InjectionBookAllViewController: UIViewController,UITableViewDelegate, UITa
                         editInject.idBook = dataManager.injectBookName[injectSection][injectIndex].id
                         editInject.nameInjectTF = dataManager.injectBookName[injectSection][injectIndex].vaccineName
                         editInject.noteInjectTF = dataManager.injectBookName[injectSection][injectIndex].note
+                        editInject.userID = userID
+                        editInject.index = index
+                        editInject.segmentSelect = indexSegment
                     }
                     
                 }
@@ -463,15 +509,24 @@ class InjectionBookAllViewController: UIViewController,UITableViewDelegate, UITa
         if segue.identifier == "returnHome" {
            
             var sourceViewController: ChooseUserTableViewController = segue.sourceViewController as! ChooseUserTableViewController
-            
+            index = sourceViewController.chooseRow
       
-            var name: String = dataManager.dictUserInfo[sourceViewController.userID]!
+            var name: String = dataManager.userData[sourceViewController.chooseRow].userName as String
+            
             self.navigationItem.title = "Sổ tiêm \(name)"
             userID = sourceViewController.userID
             self.tableView.reloadData()
             self.viewWillAppear(true)
             // Dismiss the PopoverViewController's view
             self.dismissViewControllerAnimated(false, completion: nil)
+            
+            var navController1: UINavigationController = self.tabBarController?.viewControllers?[2] as! UINavigationController
+            
+            var report = navController1.viewControllers[0] as! ReportTableViewController
+            //    [search initWithText:@"This is a test"];
+            report.userID = userID
+            report.index = index
+
         }
     }
 

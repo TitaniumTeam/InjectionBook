@@ -11,10 +11,9 @@ import UIKit
 class ReportTableViewCell: UITableViewCell {
 
     @IBOutlet weak var sickCode: UILabel!
-    
     @IBOutlet weak var injectView: UIView!
     var injectBtn: [UIButton] = []
-    
+    var sickID = Int()
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

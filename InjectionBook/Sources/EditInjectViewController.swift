@@ -17,7 +17,8 @@ class EditInjectViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var numberInject: UILabel!
     @IBOutlet weak var isInject: UIButton!
     @IBOutlet weak var editView: UIView!
-    
+   
+  
     var sickNameLabel = String()
     var numberInjectLabel = String()
     var dateInjectTF = NSDate()
@@ -29,9 +30,10 @@ class EditInjectViewController: UIViewController, UITextFieldDelegate {
     var dateToUpdate = NSDate()
     var isChangeDate = false
     let db = SQLiteDB.sharedInstance()
-    var popDatePicker : PopDatePicker?
-
-    
+    var userID = 0
+    var index = 0
+    var segmentSelect = 0
+    var nextDate = NSDate()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,19 +44,29 @@ class EditInjectViewController: UIViewController, UITextFieldDelegate {
         numberInject.text = numberInjectLabel
         dateFormat.dateFormat = "dd/MM/yyyy"
         dateInject.text = dateFormat.stringFromDate(dateInjectTF)
+        
         if isInjectBtn == 1
         {
             let images = UIImage(named: "ic_checked")
             isInject.setImage(images, forState: UIControlState.Normal)
+
         }
         nameInject.text = nameInjectTF
         noteInject.text = noteInjectTF
         
-        popDatePicker = PopDatePicker(forTextField: dateInject)
+      //  popDatePicker = PopDatePicker(forTextField: dateInject)
         self.navigationItem.backBarButtonItem?.title = ""
         dateInject.delegate = self
+       self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
-
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -90,16 +102,16 @@ class EditInjectViewController: UIViewController, UITextFieldDelegate {
             formatter.timeStyle = .NoStyle
             let initDate : NSDate? = formatter.dateFromString(dateInject.text)
             
-            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
-                self.dateInjectFix = newDate
-                // here we don't use self (no retain cycle)
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "dd/MM/yyyy"
-                forTextField.text = dateFormatter.stringFromDate(newDate)
-                
-            }
+//            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
+//                self.dateInjectFix = newDate
+//                // here we don't use self (no retain cycle)
+//                let dateFormatter = NSDateFormatter()
+//                dateFormatter.dateFormat = "dd/MM/yyyy"
+//                forTextField.text = dateFormatter.stringFromDate(newDate)
+//                
+//            }
             
-            popDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
+       //     popDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
             return false
         }
         else {
@@ -120,7 +132,15 @@ class EditInjectViewController: UIViewController, UITextFieldDelegate {
         let rc = db.execute(sql)
         self.dismissViewControllerAnimated(true, completion: nil)
 
-        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+       
+        if let inject = segue.destinationViewController as? InjectionBookAllViewController
+        {
+            inject.userID = userID
+            inject.index = index
+          //  inject.indexSegment = segmentSelect
+        }
     }
 
  

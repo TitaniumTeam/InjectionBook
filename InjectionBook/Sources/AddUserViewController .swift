@@ -23,14 +23,36 @@ class AddUserViewController: UIViewController , UITextFieldDelegate{
     var bdUser = NSDate()
     var dataManager = DataManager()
     
+    let localNotification = LocalNotification()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        dataManager.getUserInfo()
+        if dataManager.userData.count == 0
+        {
+            self.navigationController?.navigationItem.title = "Thêm bé"
+            self.navigationController?.navigationItem.hidesBackButton = true
+        }
         popDatePicker = PopDatePicker(forTextField: userBirthDay)
         userBirthDay.delegate = self
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationItem.title = "Thêm bé"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+       
+        
+   }
 
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -46,6 +68,7 @@ class AddUserViewController: UIViewController , UITextFieldDelegate{
         userBirthDay.resignFirstResponder()
         userName.resignFirstResponder()
     }
+    
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
         if (textField == userBirthDay) {
@@ -128,20 +151,52 @@ class AddUserViewController: UIViewController , UITextFieldDelegate{
             {
                 let row = dataManager.injectionScheduleData[index]
                 let subMonth = row.subMoth
-                let tomorrow: NSDate = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.CalendarUnitMonth, value: subMonth,toDate: date,
+                var tomorrow: NSDate = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.CalendarUnitMonth, value: subMonth,toDate: date,
                             options: NSCalendarOptions(0))!
-               
+                if subMonth == 204
+                {
+                    tomorrow = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.CalendarUnitYear, value: 17,toDate: date,
+                    options: NSCalendarOptions(0))!
+                    println("test thuong han")
+                                   }
+                if row.sickID == 9 && row.number > 1
+                {
+                    println("vnnb")
+                    var tomorrow1: NSDate = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.CalendarUnitMonth, value: subMonth,toDate: date,
+                        options: NSCalendarOptions(0))!
+                    tomorrow =  NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.CalendarUnitDay, value: 7,toDate: tomorrow1,
+                        options: NSCalendarOptions(0))!
+                
+                }
                 let sql = "UPDATE InjectionBook SET InjectionDate = '\(tomorrow)' WHERE InjectionBookID = \(idBook+index)"
-            
+                println(tomorrow)
+                println(idBook+index)
                 let rc = db.execute(sql)
             }
+            var isDone = 0
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0), { ()->() in
+                println("gcd hello")
+                dispatch_async(dispatch_get_main_queue(), {
+                    isDone = self.localNotification.scheduleNotification(self.dataManager.userData[self.dataManager.userData.count-1].userID)
+                
+                        if isDone > 0
+                        {
+                            FVCustomAlertView.shareInstance.hideAlertFromView(self.view, fading: true)
+                        }
+
+                    
+
+                })
+                
+            })
+            FVCustomAlertView.shareInstance.showDefaultLoadingAlertOnView(self.view, withTitle: "Đang nhập dữ liệu")
+
         }
         
      }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-       
-       
         if segue.identifier == "ChooseVaccine" {
           
             if let chooseVaccineView = segue.destinationViewController as? ChooseVaccineController{
@@ -149,11 +204,21 @@ class AddUserViewController: UIViewController , UITextFieldDelegate{
                 if let userIndex: Int = dataManager.userData.last?.userID
                 {
                     chooseVaccineView.userID = userIndex
-                   
+                    chooseVaccineView.gender = dataManager.dictUserGender[userIndex]!
+                    chooseVaccineView.isEdit = false
                 }
             }
         }
-
         
     }
-   }
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        var should = true
+        if identifier == "ChooseVaccine" || identifier == "returnHome"{
+            if userBirthDay.text.isEmpty || userName.text.isEmpty
+            {
+                should = false
+            }
+        }
+        return should
+    }
+}
